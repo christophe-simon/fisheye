@@ -16,7 +16,7 @@
 
 FishEye is a website that allows independent photographers to present their best works. It was developped for a fictive company as a student homework.
 
-This project was first started by a fictive colleague from [these mockups][https://www.figma.com/file/Q3yNeD7WTK9QHDldg9vaRl/UI-Design-FishEye-FR]. This fictive colleague published his work on [this repo][https://github.com/OpenClassrooms-Student-Center/Front-End-Fisheye].
+This project was first started by a fictive colleague from [these mockups](https://www.figma.com/file/Q3yNeD7WTK9QHDldg9vaRl/UI-Design-FishEye-FR). This fictive colleague published his work on [this repo](https://github.com/OpenClassrooms-Student-Center/Front-End-Fisheye).
 
 ### Built With
 
@@ -75,14 +75,14 @@ Project Link: [https://github.com/christophe-simon/fisheye](https://github.com/c
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/christophe-simon/basic-readme-template.svg?style=flat-square
-[contributors-url]: https://github.com/christophe-simon/basic-readme-template/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/christophe-simon/basic-readme-template.svg?style=flat-square
-[forks-url]: https://github.com/christophe-simon/basic-readme-template/network/members
-[stars-shield]: https://img.shields.io/github/stars/christophe-simon/basic-readme-template.svg?style=flat-square
-[stars-url]: https://github.com/christophe-simon/basic-readme-template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/christophe-simon/basic-readme-template.svg?style=flat-square
-[issues-url]: https://github.com/christophe-simon/basic-readme-template/issues
-[license-shield]: https://img.shields.io/github/license/christophe-simon/basic-readme-template.svg?style=flat-square
-[license-url]: https://github.com/christophe-simon/basic-readme-template/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/christophe-simon/fisheye.svg?style=flat-square
+[contributors-url]: https://github.com/christophe-simon/fisheye/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/christophe-simon/fisheye.svg?style=flat-square
+[forks-url]: https://github.com/christophe-simon/fisheye/network/members
+[stars-shield]: https://img.shields.io/github/stars/christophe-simon/fisheye.svg?style=flat-square
+[stars-url]: https://github.com/christophe-simon/fisheye/stargazers
+[issues-shield]: https://img.shields.io/github/issues/christophe-simon/fisheye.svg?style=flat-square
+[issues-url]: https://github.com/christophe-simon/fisheye/issues
+[license-shield]: https://img.shields.io/github/license/christophe-simon/fisheye.svg?style=flat-square
+[license-url]: https://github.com/christophe-simon/fisheye/blob/master/LICENSE.txt
 [product-screenshot]: docs/cover.jpg
