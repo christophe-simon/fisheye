@@ -1,10 +1,17 @@
 @import url("photographer.css");
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: "DM Sans", sans-serif;
     margin: 0;
 }
 
+img {
+    object-fit: cover;
+}
 
 header {
     display: flex;
@@ -19,12 +26,16 @@ h1 {
     margin-right: 100px;
 }
 
+h2 {
+    text-align: center;
+}
+
 .logo {
     height: 50px;
     margin-left: 100px;
 }
 
-.photographer_section {
+.photographers_section {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 70px;
