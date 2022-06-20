@@ -21,11 +21,17 @@ class Photographer {
     get country() {
         return this._country;
     }
+    get place() {
+        return `${this._city}, ${this._country}`;
+    }
     get tagline() {
         return this._tagline;
     }
     get price() {
         return this._price;
+    }
+    get dailyPrice() {
+        return `${this._price}€/jour`;
     }
     get portrait() {
         return `assets/photographers/${this._portrait}`;

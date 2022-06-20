@@ -1,76 +1,23 @@
-function photographerFactory(data) {
-    const { name, portrait, id, city, country, tagline, price } = data;
-
-    const picture = `assets/photographers/${portrait}`;
-    const place = `${city}, ${country}`;
-    const dailyPrice = `${price}€/jour`;
-
-    function getUserCardDOM() {
-
-        // Creation of a.photographer_card__link
-        const linkElt = document.createElement('a');
-        linkElt.classList.add('photographer_card__link');
-        linkElt.href = `photographer.html?photographer=${id}`;
-        linkElt.setAttribute('tabindex', 0);
-        linkElt.ariaLabel = name;
-
-        const imgElt = document.createElement('img');
-        imgElt.setAttribute('src', picture);
-        imgElt.setAttribute('alt', '');
-
-        const h2Elt = document.createElement('h2');
-        h2Elt.textContent = name;
-
-        linkElt.appendChild(imgElt);
-        linkElt.appendChild(h2Elt);
-
-        // Creation of div.photographer_card__description
-        const divElt = document.createElement('div');
-        divElt.classList.add('photographer_card__description');
-
-        const placeElt = document.createElement('p');
-        placeElt.classList.add('place');
-        placeElt.textContent = place;
-
-        const taglineElt = document.createElement('p');
-        taglineElt.classList.add('tagline');
-        taglineElt.textContent = tagline;
-
-        const priceElt = document.createElement('p');
-        priceElt.classList.add('price');
-        priceElt.textContent = dailyPrice;
-
-        divElt.appendChild(placeElt);
-        divElt.appendChild(taglineElt);
-        divElt.appendChild(priceElt);
-
-        // Creation of article.photographer_card
-        const articleElt = document.createElement('article');
-        articleElt.classList.add('photographer_card');
-
-        articleElt.appendChild(linkElt);
-        articleElt.appendChild(divElt);
-
-
-        return articleElt;
+class PhotographerPage {
+    constructor(photographer) {
+        this._photographer = photographer;
     }
 
-    function getSpecificPhotographerDataDOM() {
-
+    createPhotographerPage() {
         // Creation of div.photographer__header__data
         const photographerHeaderDataElt = document.createElement('div');
         photographerHeaderDataElt.classList.add('photographer__header__data');
 
         const nameElt = document.createElement('h1');
-        nameElt.textContent = name;
+        nameElt.textContent = this._photographer.name;
 
         const placeElt = document.createElement('p');
         placeElt.classList.add('place');
-        placeElt.textContent = place;
+        placeElt.textContent = this._photographer.place
 
         const taglineElt = document.createElement('p');
         taglineElt.classList.add('tagline');
-        taglineElt.textContent = tagline;
+        taglineElt.textContent = this._photographer.tagline;
 
         photographerHeaderDataElt.appendChild(nameElt);
         photographerHeaderDataElt.appendChild(placeElt);
@@ -92,8 +39,8 @@ function photographerFactory(data) {
         photographerHeaderPictureElt.classList.add('photographer__header__picture');
 
         const imgElt = document.createElement('img');
-        imgElt.setAttribute('src', picture);
-        imgElt.setAttribute('alt', name);
+        imgElt.setAttribute('src', this._photographer.portrait);
+        imgElt.setAttribute('alt', this._photographer.name);
 
         photographerHeaderPictureElt.appendChild(imgElt);
 
@@ -110,9 +57,9 @@ function photographerFactory(data) {
         photographerWayOfOrderingElt.classList.add('photographer__way_of_ordering');
         photographerWayOfOrderingElt.textContent = 'Trier par ...';
 
-        // Creation of section.photographer__photos
+        // Creation of section.photographer__medias
         const photographerPhotosElt = document.createElement('section');
-        photographerPhotosElt.classList.add('photographer__photos');
+        photographerPhotosElt.classList.add('photographer__medias');
 
         // Creation of div.photographer
         const photographerElt = document.createElement('div');
@@ -124,7 +71,28 @@ function photographerFactory(data) {
 
 
         return photographerElt;
-    }
 
-    return { name, picture, getUserCardDOM, getSpecificPhotographerDataDOM }
+        // Other way to write the code:
+
+        // const $wrapper = document.createElement('div')
+        // $wrapper.classList.add('movie-card-wrapper')
+
+        // const movieCard = `
+        //     <div class="movie-thumbnail center">
+        //         <img
+        //             alt="${this._movie.title}"
+        //             src="${this._movie.thumbnail}"
+        //         />
+        //     </div>
+        //     <h3 class="fs-16 center">${this._movie.title}</h3>
+        //     <p class="fs-14 center">
+        //         <span>${this._movie.released_in}</span>
+        //         -
+        //         <span>${this._movie.duration}</span>
+        //     </p>
+        // `
+        
+        // $wrapper.innerHTML = movieCard
+        // return $wrapper
+    }
 }
