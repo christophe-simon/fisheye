@@ -4,9 +4,9 @@ class PhotographerPage {
     }
 
     createPhotographerPage() {
-        // Creation of div.photographer__header__data
-        const photographerHeaderDataElt = document.createElement('div');
-        photographerHeaderDataElt.classList.add('photographer__header__data');
+        // Creation of div.photographer_presentation__data
+        const photographerPresentationDataElt = document.createElement('div');
+        photographerPresentationDataElt.classList.add('photographer_presentation__data');
 
         const nameElt = document.createElement('h1');
         nameElt.textContent = this._photographer.name;
@@ -19,58 +19,68 @@ class PhotographerPage {
         taglineElt.classList.add('tagline');
         taglineElt.textContent = this._photographer.tagline;
 
-        photographerHeaderDataElt.appendChild(nameElt);
-        photographerHeaderDataElt.appendChild(placeElt);
-        photographerHeaderDataElt.appendChild(taglineElt);
+        photographerPresentationDataElt.appendChild(nameElt);
+        photographerPresentationDataElt.appendChild(placeElt);
+        photographerPresentationDataElt.appendChild(taglineElt);
 
-        // Creation of div.photographer__header__button
-        const photographerHeaderButtonElt = document.createElement('div');
-        photographerHeaderButtonElt.classList.add('photographer__header__button');
+        // Creation of div.photographer_presentation__button
+        const photographerPresentationButtonElt = document.createElement('div');
+        photographerPresentationButtonElt.classList.add('photographer_presentation__button');
 
         const buttonElt = document.createElement('button');
         buttonElt.classList.add('contact_button');
         buttonElt.textContent = 'Contactez-moi';
         buttonElt.addEventListener('click', displayModal);
 
-        photographerHeaderButtonElt.appendChild(buttonElt);
+        photographerPresentationButtonElt.appendChild(buttonElt);
 
-        // Creation of div.photographer__header__picture
-        const photographerHeaderPictureElt = document.createElement('div');
-        photographerHeaderPictureElt.classList.add('photographer__header__picture');
+        // Creation of div.photographer_presentation__picture
+        const photographerPresentationPictureElt = document.createElement('div');
+        photographerPresentationPictureElt.classList.add('photographer_presentation__picture');
 
         const imgElt = document.createElement('img');
-        imgElt.setAttribute('src', this._photographer.portrait);
+        imgElt.setAttribute('src', `assets/photographers/${this._photographer.portrait}`);
         imgElt.setAttribute('alt', this._photographer.name);
 
-        photographerHeaderPictureElt.appendChild(imgElt);
+        photographerPresentationPictureElt.appendChild(imgElt);
 
-        // Creation of div.photographer__header
-        const photographerHeaderElt = document.createElement('div');
-        photographerHeaderElt.classList.add('photographer__header');
+        // Creation of div.photographer_presentation
+        const photographerPresentationElt = document.createElement('div');
+        photographerPresentationElt.classList.add('photographer_presentation');
 
-        photographerHeaderElt.appendChild(photographerHeaderDataElt);
-        photographerHeaderElt.appendChild(photographerHeaderButtonElt);
-        photographerHeaderElt.appendChild(photographerHeaderPictureElt);
+        photographerPresentationElt.appendChild(photographerPresentationDataElt);
+        photographerPresentationElt.appendChild(photographerPresentationButtonElt);
+        photographerPresentationElt.appendChild(photographerPresentationPictureElt);
 
-        // Creation of p.photographer__way_of_ordering
-        const photographerWayOfOrderingElt = document.createElement('p');
-        photographerWayOfOrderingElt.classList.add('photographer__way_of_ordering');
-        photographerWayOfOrderingElt.textContent = 'Trier par ...';
+        // Creation of p.way_of_ordering
+        const wayOfOrderingElt = document.createElement('p');
+        wayOfOrderingElt.classList.add('way_of_ordering');
+        wayOfOrderingElt.textContent = 'Trier par ...';
 
-        // Creation of section.photographer__medias
-        const photographerPhotosElt = document.createElement('section');
-        photographerPhotosElt.classList.add('photographer__medias');
+        // Creation of section.photographer_medias
+        const photographerMediasElt = document.createElement('section');
+        photographerMediasElt.classList.add('photographer_medias');
 
-        // Creation of div.photographer
-        const photographerElt = document.createElement('div');
-        photographerElt.classList.add('photographer');
+        // Creation of div.photographer_portfolio
+        const photographerPortfolioElt = document.createElement('div');
+        photographerPortfolioElt.classList.add('photographer_portfolio');
 
-        photographerElt.appendChild(photographerHeaderElt);
-        photographerElt.appendChild(photographerWayOfOrderingElt);
-        photographerElt.appendChild(photographerPhotosElt);
+        photographerPortfolioElt.appendChild(wayOfOrderingElt);
+        photographerPortfolioElt.appendChild(photographerMediasElt);
+
+        // Creation of aside.aside
+        const asideElt = document.createElement('aside');
+        asideElt.classList.add('aside');
 
 
-        return photographerElt;
+        // Creation of a blank element
+        const blankElt = document.createElement('div');
+
+        blankElt.appendChild(photographerPresentationElt);
+        blankElt.appendChild(photographerPortfolioElt);
+        blankElt.appendChild(asideElt);
+
+        return blankElt.innerHTML;
 
         // Other way to write the code:
 

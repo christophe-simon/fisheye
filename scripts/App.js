@@ -7,11 +7,11 @@ class App {
     }
 
     async displayHomePage() {
-        // Ici je récupère mes photographes de mon fichier photographers.json
+        // Get photographers data from photographers.json file
         const photographersData = await this._photographerApi.getPhotographersData();
 
         photographersData
-            // Ici, je transforme mon tableau de données en un tableau de classe Photographer
+            // Transform array of data in array of photographers
             .map(photographer => new Photographer(photographer))
             .forEach(photographer => {
                 const Template = new PhotographerCard(photographer);
@@ -25,78 +25,71 @@ class App {
         const params = (new URL(document.location)).searchParams;
         const photographerId = parseInt(params.get('photographer'));
         if (!isNaN(photographerId)) {
-            const photographerData = await this._photographerApi
+            const photographer = await this._photographerApi
                 .getPhotographerDataByPhotographerId(photographerId);
-            const arrayPhotographersData = [];
-            arrayPhotographersData.push(photographerData);
-            const arrayPhotographer = arrayPhotographersData.map(
-                photographer => new Photographer(photographer)
-            );
-            const photographer = arrayPhotographer[0];
-            const Template = new PhotographerPage(photographer);
-            this.$specificPhotographerWrapper.appendChild(
-                Template.createPhotographerPage()
-            );
+            // const arrayPhotographersData = [];
+            // arrayPhotographersData.push(photographerData);
+            // const arrayPhotographer = arrayPhotographersData.map(
+            //     photographer => new Photographer(photographer)
+            // );
+            // const photographer = arrayPhotographer[0];
+            const photographerPageTemplate = new PhotographerPage(photographer);
+            this.$specificPhotographerWrapper.innerHTML = photographerPageTemplate.createPhotographerPage();
 
-            const $mediasWrapper = document.querySelector('.photographer__medias');
+            const $mediasWrapper = document.querySelector('.photographer_medias');
             const mediasData = await this._mediaApi.getMediasDataByPhotographerId(photographerId);
 
-            mediasData
-            // Ici, je transforme mon tableau de données en un tableau de classe Photographer
-            .map((media) => {
-                if (typeof media.image !== 'undefined') {
-                    return new Image(media);
-                } else if (typeof media.video !== 'undefined') {
-                    return new Video(media);
-                } else {
+            const medias = mediasData
+                .map((media) => {
+                    if (typeof media.image !== 'undefined') {
+                        return new Image(media);
+                    } else if (typeof media.video !== 'undefined') {
+                        return new Video(media);
+                    }
                     return null;
-                }
-            })
-            .forEach(media => {
-                if (typeof media.image !== 'undefined') {
-                    const Template = new ImageCard(media);
+                })
+                .filter(element => (element instanceof Image) || (element instanceof Video));
+
+            medias.forEach(media => {
+                if (media instanceof Image) {
+                    const mediaTemplate = new ImageCard(media);
                     $mediasWrapper.appendChild(
-                        Template.createImageCard()
+                        mediaTemplate.createImageCard()
                     );
-                } else if (typeof media.video !== 'undefined') {
-                    const Template = new VideoCard(media);
+                } else if (media instanceof Video) {
+                    const mediaTemplate = new VideoCard(media);
                     $mediasWrapper.appendChild(
-                        Template.createVideoCard()
+                        mediaTemplate.createVideoCard()
                     );
-                } else {
-                    console.log('on est passé dans le else');
-                    // this.$mediasWrapper.appendChild(null);
                 }
-            })
+            });
+
+            const $asideWrapper = document.querySelector('.aside');
+            const asideTemplate = new Aside(photographer, medias);
+            $asideWrapper.innerHTML = asideTemplate.createAside();
         } else {
-            //displayPhotographerIdIsNan();
-            console.log('photographerId n\' est pas un nombre');
+            this.$specificPhotographerWrapper.innerHTML = 
+                '<div class="error_message">La variable photographer que vous avez indiquée dans l\'URL n\' est pas un nombre.</div>';
         }
     }
+
+    async displayErrorPage() {
+ 
+        console.log('Aucune page ne correspond malheureusement à cette adresse.');
+    }
+
 }
 
 const currentPage = document.location.pathname;
-let pageToDisplay;
+const app = new App();
 switch (currentPage) {
     case '/':
     case '/index.html':
-        pageToDisplay = 'home';
-        break;
-    case '/photographer.html':
-        pageToDisplay = 'photographer';
-        break;
-    default:
-        pageToDisplay = null;
-}
-
-const app = new App();
-switch (pageToDisplay) {
-    case 'home':
         app.displayHomePage();
         break;
-    case 'photographer':
+    case '/photographer.html':
         app.displayPhotographerPage();
         break;
-    // default:
-    //     app.displayDefaultPage();
+    default:
+        app.displayErrorPage();
 }

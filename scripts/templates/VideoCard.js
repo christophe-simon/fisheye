@@ -8,11 +8,16 @@ class VideoCard extends MediaCard {
         const mediaCardMediaElt = document.createElement('div');
         mediaCardMediaElt.classList.add('media_card__media');
 
-        const imgElt = document.createElement('img');
-        imgElt.setAttribute('src', `assets/medias/${this._media.photographerId}/${this._media.video}`);
-        imgElt.setAttribute('alt', '');
- 
-        mediaCardMediaElt.appendChild(imgElt);
+        const sourceElt = document.createElement('source');
+        sourceElt.setAttribute('src', `assets/medias/${this._media.photographerId}/${this._media.video}`);
+        sourceElt.setAttribute('type', 'video/mp4');
+
+        const videoElt = document.createElement('video');
+        // videoElt.setAttribute('controls', 'controls');
+        videoElt.appendChild(sourceElt);
+        videoElt.innerHTML = videoElt.innerHTML + 'Sorry, your browser doesn\'t support embedded videos.';
+
+        mediaCardMediaElt.appendChild(videoElt);
 
         // Creation of div.media_card__description
         const mediaCardDescriptionElt = document.createElement('div');
@@ -20,9 +25,11 @@ class VideoCard extends MediaCard {
 
         const mediaCardDescriptionTitleElt = document.createElement('p');
         mediaCardDescriptionTitleElt.classList.add('media_card__description__title');
+        mediaCardDescriptionTitleElt.textContent = this._media.title;
 
         const mediaCardDescriptionPopularityElt = document.createElement('p');
         mediaCardDescriptionPopularityElt.classList.add('media_card__description__popularity');
+        mediaCardDescriptionPopularityElt.innerHTML = `${this._media.likes} <i class="fa-solid fa-heart"></i>`;
 
         mediaCardDescriptionElt.appendChild(mediaCardDescriptionTitleElt);
         mediaCardDescriptionElt.appendChild(mediaCardDescriptionPopularityElt);

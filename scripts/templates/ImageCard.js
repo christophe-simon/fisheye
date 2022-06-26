@@ -20,9 +20,11 @@ class ImageCard extends MediaCard {
 
         const mediaCardDescriptionTitleElt = document.createElement('p');
         mediaCardDescriptionTitleElt.classList.add('media_card__description__title');
+        mediaCardDescriptionTitleElt.textContent = this._media.title;
 
         const mediaCardDescriptionPopularityElt = document.createElement('p');
         mediaCardDescriptionPopularityElt.classList.add('media_card__description__popularity');
+        mediaCardDescriptionPopularityElt.innerHTML = `${this._media.likes} <i class="fa-solid fa-heart"></i>`;
 
         mediaCardDescriptionElt.appendChild(mediaCardDescriptionTitleElt);
         mediaCardDescriptionElt.appendChild(mediaCardDescriptionPopularityElt);
