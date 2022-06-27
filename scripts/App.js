@@ -36,6 +36,9 @@ class App {
             const photographerPageTemplate = new PhotographerPage(photographer);
             this.$specificPhotographerWrapper.innerHTML = photographerPageTemplate.createPhotographerPage();
 
+            const buttonElt = document.querySelector('.contact_button');
+            buttonElt.addEventListener('click', displayModal);
+
             const $mediasWrapper = document.querySelector('.photographer_medias');
             const mediasData = await this._mediaApi.getMediasDataByPhotographerId(photographerId);
 

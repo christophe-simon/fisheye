@@ -30,7 +30,6 @@ class PhotographerPage {
         const buttonElt = document.createElement('button');
         buttonElt.classList.add('contact_button');
         buttonElt.textContent = 'Contactez-moi';
-        buttonElt.addEventListener('click', displayModal);
 
         photographerPresentationButtonElt.appendChild(buttonElt);
 

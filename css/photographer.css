@@ -1,5 +1,13 @@
 #contact_modal {
     display: none;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backdrop-filter: blur(10px);
 }
 
 .photographer_data {

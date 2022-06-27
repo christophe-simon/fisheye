@@ -13,7 +13,7 @@ class VideoCard extends MediaCard {
         sourceElt.setAttribute('type', 'video/mp4');
 
         const videoElt = document.createElement('video');
-        // videoElt.setAttribute('controls', 'controls');
+        videoElt.setAttribute('controls', 'controls');
         videoElt.appendChild(sourceElt);
         videoElt.innerHTML = videoElt.innerHTML + 'Sorry, your browser doesn\'t support embedded videos.';
 
@@ -29,7 +29,7 @@ class VideoCard extends MediaCard {
 
         const mediaCardDescriptionPopularityElt = document.createElement('p');
         mediaCardDescriptionPopularityElt.classList.add('media_card__description__popularity');
-        mediaCardDescriptionPopularityElt.innerHTML = `${this._media.likes} <i class="fa-solid fa-heart"></i>`;
+        mediaCardDescriptionPopularityElt.innerHTML = `${this._media.likes} <i class="fa-solid fa-heart" aria-label="likes"></i>`;
 
         mediaCardDescriptionElt.appendChild(mediaCardDescriptionTitleElt);
         mediaCardDescriptionElt.appendChild(mediaCardDescriptionPopularityElt);
