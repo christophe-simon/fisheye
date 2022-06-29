@@ -5,20 +5,19 @@ class Aside {
     }
 
     getTotalLikes() {
-        // const initialValue = 0;
-        // const sumWithInitial = this._medias.reduce(
-        //   (previousValue, currentValue) => previousValue.likes + currentValue.likes,
-        //   initialValue
-        // );
-        // console.log('sum avec reduce ' + sumWithInitial);
+        const initialValue = 0;
+        const sumWithInitial = this._medias.reduce(
+          (previousValue, currentValue) => previousValue + currentValue.likes,
+          initialValue
+        );
+        return sumWithInitial;
 
         // Other way to do it:
-        let sum = 0
-        for (let element of this._medias) {
-            sum += element.likes;
-        }
-        console.log('sum avec for ' + sum);
-        return sum;
+        // let sum = 0
+        // for (let element of this._medias) {
+        //     sum += element.likes;
+        // }
+        // return sum;
     }
 
     createAside() {

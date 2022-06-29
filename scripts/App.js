@@ -36,9 +36,6 @@ class App {
             const photographerPageTemplate = new PhotographerPage(photographer);
             this.$specificPhotographerWrapper.innerHTML = photographerPageTemplate.createPhotographerPage();
 
-            const buttonElt = document.querySelector('.contact_button');
-            buttonElt.addEventListener('click', displayModal);
-
             const $mediasWrapper = document.querySelector('.photographer_medias');
             const mediasData = await this._mediaApi.getMediasDataByPhotographerId(photographerId);
 
@@ -67,9 +64,26 @@ class App {
                 }
             });
 
+            // Creation of the aside box mentionning total likes and daily price of the photographer
             const $asideWrapper = document.querySelector('.aside');
             const asideTemplate = new Aside(photographer, medias);
             $asideWrapper.innerHTML = asideTemplate.createAside();
+
+            // Creation of the addEventListener on the contact button
+            const buttonElt = document.querySelector('.contact_button');
+            buttonElt.addEventListener('click', displayModal);
+
+            // Addition of the name of the photographer in the modal window title
+            const $titleWrapper = document.querySelector('.modal header h2');
+            $titleWrapper.innerHTML = `Contactez-moi<br>${photographer.name}`;
+            
+            // Creation of the addEventListener on the close button of the modal
+            const closeButtonElt = document.querySelector('.modal header img');
+            closeButtonElt.addEventListener('click', closeModal);
+
+            // Creation of the addEventListener on the close button of the modal
+            const formElt = document.querySelector('form');
+            formElt.addEventListener('submit', manageValidation);
         } else {
             this.$specificPhotographerWrapper.innerHTML = 
                 '<div class="error_message">La variable photographer que vous avez indiquée dans l\'URL n\' est pas un nombre.</div>';

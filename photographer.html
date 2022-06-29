@@ -27,16 +27,48 @@
         <div id="contact_modal">
             <div class="modal">
                 <header>
-                    <h2>Contactez-moi</h2>
-                    <img src="assets/icons/close.svg" onclick="closeModal()" />
+                    <h2></h2>
+                    <img src="assets/icons/close.svg">
                 </header>
                 <form>
-                    <div>
-                        <label>Prénom</label>
-                        <input />
+                    <div id="first_name_data" class="formData">
+                        <label for="first_name">Prénom</label>
+                        <input
+                            id="first_name"
+                            name="first_name"
+                            class="text_control"
+                            type="text"
+                        />
+                        <p class="error_message">Vous devez indiquer un prénom contenant un minimum de 2 caractères</p>
                     </div>
-                    <button class="contact_button">Envoyer</button>
+                    <div id="last_name_data" class="formData">
+                        <label for="last_name">Nom</label>
+                        <input
+                            id="last_name"
+                            name="last_name"
+                            class="text_control"
+                            type="text"
+                        />
+                        <p class="error_message">Vous devez indiquer un nom contenant un minimum de 2 caractères</p>
+                    </div>
+                    <div id="email_data" class="formData">
+                        <label for="email">Email</label>
+                        <input
+                            id="email"
+                            name="email"
+                            class="text_control"
+                            type="text"
+                        />
+                        <p class="error_message">Vous devez indiquer une adresse email valide</p>
+                    </div>
+                    <div id="message_data" class="formData">
+                        <label for="message">Votre message</label>
+                        <textarea id="message" name="message" class="text_control"></textarea>
+                        <p class="error_message">Vous devez indiquer un message contenant un minimum de 20 caractères</p>
+                    </div>
+                    <button class="form_button">Envoyer</button>
                 </form>
+                <div id="successful_sending">Message envoyé!</div>
             </div>
         </div>
 
@@ -61,6 +93,7 @@
 
         <!-- Utils -->
         <script src="scripts/utils/contactForm.js"></script>
+        <script src="scripts/utils/formValidation.js"></script>
 
         <!-- Entry point -->
         <script src="scripts/App.js"></script>
