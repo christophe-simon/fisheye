@@ -15,7 +15,7 @@ const nameRegex = new RegExp(NAME_REGEX);
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const emailRegex = new RegExp(EMAIL_REGEX);
 
-const MESSAGE_REGEX = /^.{20,}$/;
+const MESSAGE_REGEX = /^.[\n\r]{20,}$/;
 const messageRegex = new RegExp(MESSAGE_REGEX);
 
 // Constants

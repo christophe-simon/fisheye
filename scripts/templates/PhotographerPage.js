@@ -5,81 +5,93 @@ class PhotographerPage {
 
     createPhotographerPage() {
         // Creation of div.photographer_presentation__data
-        const photographerPresentationDataElt = document.createElement('div');
-        photographerPresentationDataElt.classList.add('photographer_presentation__data');
+        const $photographerWrapper = document.createElement('div');
+        $photographerWrapper.classList.add('photographer_presentation__data');
 
-        const nameElt = document.createElement('h1');
-        nameElt.textContent = this._photographer.name;
+        // div.photographer_presentation__data contains the name of the photographer
+        const $name = document.createElement('h1');
+        $name.textContent = this._photographer.name;
 
-        const placeElt = document.createElement('p');
-        placeElt.classList.add('place');
-        placeElt.textContent = this._photographer.place
+        // div.photographer_presentation__data contains the place of the photographer
+        const $place = document.createElement('p');
+        $place.classList.add('place');
+        $place.textContent = this._photographer.place
 
-        const taglineElt = document.createElement('p');
-        taglineElt.classList.add('tagline');
-        taglineElt.textContent = this._photographer.tagline;
+        // div.photographer_presentation__data contains the tagline of the photographer
+        const $tagline = document.createElement('p');
+        $tagline.classList.add('tagline');
+        $tagline.textContent = this._photographer.tagline;
 
-        photographerPresentationDataElt.appendChild(nameElt);
-        photographerPresentationDataElt.appendChild(placeElt);
-        photographerPresentationDataElt.appendChild(taglineElt);
+        // We add the name, the place and the tagline to the photographer wrapper
+        $photographerWrapper.appendChild($name);
+        $photographerWrapper.appendChild($place);
+        $photographerWrapper.appendChild($tagline);
 
         // Creation of div.photographer_presentation__button
-        const photographerPresentationButtonElt = document.createElement('div');
-        photographerPresentationButtonElt.classList.add('photographer_presentation__button');
+        const $buttonWrapper = document.createElement('div');
+        $buttonWrapper.classList.add('photographer_presentation__button');
 
-        const buttonElt = document.createElement('button');
-        buttonElt.classList.add('contact_button');
-        buttonElt.textContent = 'Contactez-moi';
+        // div.photographer_presentation__button contains a button
+        const $button = document.createElement('button');
+        $button.classList.add('contact_button');
+        $button.textContent = 'Contactez-moi';
+        $button.setAttribute('tabindex', 1);
 
-        photographerPresentationButtonElt.appendChild(buttonElt);
+        // We add the button to the button wrapper
+        $buttonWrapper.appendChild($button);
 
         // Creation of div.photographer_presentation__picture
-        const photographerPresentationPictureElt = document.createElement('div');
-        photographerPresentationPictureElt.classList.add('photographer_presentation__picture');
+        const $pictureWrapper = document.createElement('div');
+        $pictureWrapper.classList.add('photographer_presentation__picture');
 
-        const imgElt = document.createElement('img');
-        imgElt.setAttribute('src', `assets/photographers/${this._photographer.portrait}`);
-        imgElt.setAttribute('alt', this._photographer.name);
+        // div.photographer_presentation__picture contains a picture of the photographer
+        const $picture = document.createElement('img');
+        $picture.setAttribute('src', `assets/photographers/${this._photographer.portrait}`);
+        $picture.setAttribute('alt', `photo de ${this._photographer.name}`);
 
-        photographerPresentationPictureElt.appendChild(imgElt);
+        // We add the picture to the picture wrapper
+        $pictureWrapper.appendChild($picture);
 
         // Creation of div.photographer_presentation
-        const photographerPresentationElt = document.createElement('div');
-        photographerPresentationElt.classList.add('photographer_presentation');
+        const $presentationWrapper = document.createElement('div');
+        $presentationWrapper.classList.add('photographer_presentation');
 
-        photographerPresentationElt.appendChild(photographerPresentationDataElt);
-        photographerPresentationElt.appendChild(photographerPresentationButtonElt);
-        photographerPresentationElt.appendChild(photographerPresentationPictureElt);
+        // We add the photographer wrapper, the button wrapper and the picture wrapper to the presentation wrapper
+        $presentationWrapper.appendChild($photographerWrapper);
+        $presentationWrapper.appendChild($buttonWrapper);
+        $presentationWrapper.appendChild($pictureWrapper);
 
-        // Creation of p.way_of_ordering
-        const wayOfOrderingElt = document.createElement('p');
-        wayOfOrderingElt.classList.add('way_of_ordering');
-        wayOfOrderingElt.textContent = 'Trier par ...';
+        // Creation of p.photographer_portfolio__sorted_by
+        const $sortedByWrapper = document.createElement('p');
+        $sortedByWrapper.classList.add('photographer_portfolio__sorted_by');
+        $sortedByWrapper.textContent = 'Trier par ...';
 
-        // Creation of section.photographer_medias
-        const photographerMediasElt = document.createElement('section');
-        photographerMediasElt.classList.add('photographer_medias');
+        // Creation of section.photographer_portfolio__medias
+        const $mediasWrapper = document.createElement('section');
+        $mediasWrapper.classList.add('photographer_portfolio__medias');
 
         // Creation of div.photographer_portfolio
-        const photographerPortfolioElt = document.createElement('div');
-        photographerPortfolioElt.classList.add('photographer_portfolio');
+        const $portfolioWrapper = document.createElement('div');
+        $portfolioWrapper.classList.add('photographer_portfolio');
 
-        photographerPortfolioElt.appendChild(wayOfOrderingElt);
-        photographerPortfolioElt.appendChild(photographerMediasElt);
+        // We add the "sorted by" and the medias to the portfolio
+        $portfolioWrapper.appendChild($sortedByWrapper);
+        $portfolioWrapper.appendChild($mediasWrapper);
 
         // Creation of aside.aside
-        const asideElt = document.createElement('aside');
-        asideElt.classList.add('aside');
+        const $asideWrapper = document.createElement('aside');
+        $asideWrapper.classList.add('aside');
 
 
-        // Creation of a blank element
-        const blankElt = document.createElement('div');
+        // Creation of a main wrapper
+        const $mainWrapper = document.createElement('div');
 
-        blankElt.appendChild(photographerPresentationElt);
-        blankElt.appendChild(photographerPortfolioElt);
-        blankElt.appendChild(asideElt);
+        // We add the presentation wrapper, the portfolio wrapper and the aside wrapper to the wrapper
+        $mainWrapper.appendChild($presentationWrapper);
+        $mainWrapper.appendChild($portfolioWrapper);
+        $mainWrapper.appendChild($asideWrapper);
 
-        return blankElt.innerHTML;
+        return $mainWrapper.innerHTML;
 
         // Other way to write the code:
 

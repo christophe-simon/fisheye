@@ -5,39 +5,62 @@ class ImageCard extends MediaCard {
 
     createImageCard() {
         // Creation of div.media_card__media
-        const mediaCardMediaElt = document.createElement('div');
-        mediaCardMediaElt.classList.add('media_card__media');
+        const $media = document.createElement('div');
+        $media.classList.add('media_card__media');
 
-        const imgElt = document.createElement('img');
-        imgElt.setAttribute('src', `assets/medias/${this._media.photographerId}/${this._media.image}`);
-        imgElt.setAttribute('alt', '');
+        const $img = document.createElement('img');
+        $img.setAttribute('src', `assets/medias/${this._media.photographerId}/${this._media.image}`);
+        $img.setAttribute('alt', '');
  
-        mediaCardMediaElt.appendChild(imgElt);
+        $media.appendChild($img);
 
         // Creation of div.media_card__description
-        const mediaCardDescriptionElt = document.createElement('div');
-        mediaCardDescriptionElt.classList.add('media_card__description');
+        const $description = document.createElement('div');
+        $description.classList.add('media_card__description');
 
-        const mediaCardDescriptionTitleElt = document.createElement('p');
-        mediaCardDescriptionTitleElt.classList.add('media_card__description__title');
-        mediaCardDescriptionTitleElt.textContent = this._media.title;
+        const $title = document.createElement('p');
+        $title.classList.add('media_card__description__title');
+        $title.textContent = this._media.title;
 
-        const mediaCardDescriptionPopularityElt = document.createElement('p');
-        mediaCardDescriptionPopularityElt.classList.add('media_card__description__popularity');
-        mediaCardDescriptionPopularityElt.innerHTML = `${this._media.likes} <i class="fa-solid fa-heart" aria-label="likes"></i>`;
+        const $popularity = document.createElement('p');
+        $popularity.classList.add('media_card__description__popularity');
+        $popularity.innerHTML = `${this._media.likes} <i class="fa-solid fa-heart" aria-label="likes"></i>`;
 
-        mediaCardDescriptionElt.appendChild(mediaCardDescriptionTitleElt);
-        mediaCardDescriptionElt.appendChild(mediaCardDescriptionPopularityElt);
+        $description.appendChild($title);
+        $description.appendChild($popularity);
 
         // Creation of article.media_card
-        const mediaCardElt = document.createElement('article');
-        mediaCardElt.classList.add('media_card');
+        const $mediaCard = document.createElement('article');
+        $mediaCard.classList.add('media_card');
 
-        mediaCardElt.appendChild(mediaCardMediaElt);
-        mediaCardElt.appendChild(mediaCardDescriptionElt);
+        $mediaCard.appendChild($media);
+        $mediaCard.appendChild($description);
 
+        // Creation of the link around the card
+        const $link = document.createElement('a');
+        $link.setAttribute('href', `assets/medias/${this._media.photographerId}/${this._media.image}`);
 
-        return mediaCardElt;
+        $link.appendChild($mediaCard);
+
+        // We open a lightbox when we click on this link
+        $link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const lightbox = new Lightbox();
+            lightbox.buildLightbox(this._media.title, $link.href);
+            const $lightbox = document.querySelector('.lightbox');
+            $lightbox.style.display = 'block';
+        });
+
+        // We add the possibility to open a lightbox by pressing the "Enter" key while the media card is focused
+        $link.addEventListener('keypress', (e) => {
+            e.preventDefault();
+            const lightbox = new Lightbox();
+            lightbox.buildLightbox(this._media.title, $link.href);
+            const $lightbox = document.querySelector('.lightbox');
+            $lightbox.style.display = 'block';
+        });
+
+        return $link;
 
         // Other way to write the code:
 

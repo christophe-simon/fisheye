@@ -36,7 +36,7 @@ class App {
             const photographerPageTemplate = new PhotographerPage(photographer);
             this.$specificPhotographerWrapper.innerHTML = photographerPageTemplate.createPhotographerPage();
 
-            const $mediasWrapper = document.querySelector('.photographer_medias');
+            const $mediasWrapper = document.querySelector('.photographer_portfolio__medias');
             const mediasData = await this._mediaApi.getMediasDataByPhotographerId(photographerId);
 
             const medias = mediasData

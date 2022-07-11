@@ -5,12 +5,8 @@ class Aside {
     }
 
     getTotalLikes() {
-        const initialValue = 0;
-        const sumWithInitial = this._medias.reduce(
-          (previousValue, currentValue) => previousValue + currentValue.likes,
-          initialValue
-        );
-        return sumWithInitial;
+        return this._medias.reduce(
+          (previousValue, currentValue) => previousValue + currentValue.likes, 0);
 
         // Other way to do it:
         // let sum = 0
