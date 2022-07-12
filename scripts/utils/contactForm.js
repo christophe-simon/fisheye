@@ -1,7 +1,7 @@
 /**
  * Initialize the modal
  */
- function initializeModal() {
+function initializeModal() {
     const formElt = document.querySelector('form');
     formElt.style.display = 'block';
     formElt.reset();
@@ -16,7 +16,7 @@
         element.setAttribute('data_error_visible', 'false');
     }
 
-    const validationMessage = document.getElementById('successful_sending')
+    const validationMessage = document.getElementById('successful_sending');
     validationMessage.style.display = 'none';
 }
 

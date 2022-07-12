@@ -42,23 +42,23 @@ class ImageCard extends MediaCard {
 
         $link.appendChild($mediaCard);
 
-        // We open a lightbox when we click on this link
-        $link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const lightbox = new Lightbox();
-            lightbox.buildLightbox(this._media.title, $link.href);
-            const $lightbox = document.querySelector('.lightbox');
-            $lightbox.style.display = 'block';
-        });
+        // // We open a lightbox when we click on this link
+        // $link.addEventListener('click', (e) => {
+        //     e.preventDefault();
+        //     const lightbox = new Lightbox();
+        //     lightbox.buildLightbox(this._media.title, $link.href);
+        //     const $lightbox = document.querySelector('.lightbox');
+        //     $lightbox.style.display = 'block';
+        // });
 
-        // We add the possibility to open a lightbox by pressing the "Enter" key while the media card is focused
-        $link.addEventListener('keypress', (e) => {
-            e.preventDefault();
-            const lightbox = new Lightbox();
-            lightbox.buildLightbox(this._media.title, $link.href);
-            const $lightbox = document.querySelector('.lightbox');
-            $lightbox.style.display = 'block';
-        });
+        // // We add the possibility to open a lightbox by pressing the "Enter" key while the media card is focused
+        // $link.addEventListener('keypress', (e) => {
+        //     e.preventDefault();
+        //     const lightbox = new Lightbox();
+        //     lightbox.buildLightbox(this._media.title, $link.href);
+        //     const $lightbox = document.querySelector('.lightbox');
+        //     $lightbox.style.display = 'block';
+        // });
 
         return $link;
 
