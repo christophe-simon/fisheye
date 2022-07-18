@@ -1,12 +1,12 @@
 // DOM Elements
-const firstNameElt = document.getElementById('first_name');
-const lastNameElt = document.getElementById('last_name');
-const emailElt = document.getElementById('email');
-const messageElt = document.getElementById('message');
-const firstNameErrorMessageElt = document.querySelector('#first_name_data p.error_message');
-const lastNameErrorMessageElt = document.querySelector('#last_name_data p.error_message');
-const emailErrorMessageElt = document.querySelector('#email_data p.error_message');
-const messageErrorMessageElt = document.querySelector('#message_data p.error_message');
+const $firstName = document.getElementById('first_name');
+const $lastName = document.getElementById('last_name');
+const $email = document.getElementById('email');
+const $message = document.getElementById('message');
+const $firstNameErrorMessage = document.querySelector('#first_name_data p.error_message');
+const $lastNameErrorMessage = document.querySelector('#last_name_data p.error_message');
+const $emailErrorMessage = document.querySelector('#email_data p.error_message');
+const $messageErrorMessage = document.querySelector('#message_data p.error_message');
 
 // Regex variables
 const NAME_REGEX = /^[a-zA-ZáéíóúýÁÉÍÓÚÝàèìòùÀÈÌÒÙäëïöüÿÄËÏÖÜŸçÇæœÆŒåÅßøØãñõÃÑÕ']{2,}$/;
@@ -19,10 +19,10 @@ const MESSAGE_REGEX = /^.[\n\r]{20,}$/;
 const messageRegex = new RegExp(MESSAGE_REGEX);
 
 // Constants
-const FIRST_NAME_ELT = 'firstNameElt';
-const LAST_NAME_ELT = 'lastNameElt';
-const EMAIL_ELT = 'emailElt';
-const MESSAGE_ELT = 'messageElt';
+const FIRST_NAME_ELT = '$firstName';
+const LAST_NAME_ELT = '$lastName';
+const EMAIL_ELT = '$email';
+const MESSAGE_ELT = '$message';
 
 
 /**
@@ -33,13 +33,13 @@ const MESSAGE_ELT = 'messageElt';
  const isDataValid = function (elt) {
     switch (elt) {
         case FIRST_NAME_ELT:
-            return nameRegex.test(firstNameElt.value);
+            return $firstName.value.length >= 2 ? true : false;
         case LAST_NAME_ELT:
-            return nameRegex.test(lastNameElt.value);
+            return $lastName.value.length >= 2 ? true : false;
         case EMAIL_ELT:
-            return emailRegex.test(emailElt.value);
+            return emailRegex.test($email.value);
         case MESSAGE_ELT:
-            return messageRegex.test(messageElt.value);
+            return $message.value.length >= 20 ? true : false;
         default:
             throw 'Pas de donnée de ce type';
     }
@@ -51,17 +51,17 @@ const MESSAGE_ELT = 'messageElt';
  */
 const manageElementDisplay = function (elt) {
     const elements = {
-        firstNameElt,
-        lastNameElt,
-        emailElt,
-        messageElt
+        $firstName,
+        $lastName,
+        $email,
+        $message
     };
 
     const errorMessageElts = {
-        firstNameElt: firstNameErrorMessageElt,
-        lastNameElt: lastNameErrorMessageElt,
-        emailElt: emailErrorMessageElt,
-        messageElt: messageErrorMessageElt
+        $firstName: $firstNameErrorMessage,
+        $lastName: $lastNameErrorMessage,
+        $email: $emailErrorMessage,
+        $message: $messageErrorMessage
     };
 
     if (elt !== null && isDataValid(elt)) {
@@ -95,10 +95,10 @@ const manageValidation = function (evt) {
 
     if (isFormValid()) {
         console.log('Le formulaire a été validé');
-        const formElt = document.querySelector('form');
-        formElt.style.display = 'none';
-        const validationMessage = document.getElementById('successful_sending')
-        validationMessage.style.display = 'block';
+        const $form = document.querySelector('form');
+        $form.style.display = 'none';
+        const $validationMessage = document.getElementById('successful_sending');
+        $validationMessage.style.display = 'block';
     } else {
         manageElementDisplay(FIRST_NAME_ELT);
         manageElementDisplay(LAST_NAME_ELT);
