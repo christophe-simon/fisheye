@@ -31,33 +31,29 @@
 
     display() {
         const $lightbox = document.getElementById('lightbox');
-        $lightbox.style.display = 'block';
-        const $media = document.querySelector('.lightbox__container__media');
+        $lightbox.showModal();
+        const $mediaWrapper = document.querySelector('.lightbox__container__media');
         const media = this._array[this._position];
         
         if (media instanceof Image) {
-
-            const $img = document.createElement('img');
-            $img.setAttribute('src', `assets/medias/${media.photographerId}/${media.image}`);
-            $img.setAttribute('alt', '');
-            $media.appendChild($img);
-
+            const imageCardTemplate = new ImageCard(media);
+            imageCardTemplate.createLightboxImageCard();
         } else if (media instanceof Video) {
-    
-            const $source = document.createElement('source');
-            $source.setAttribute('src', `assets/medias/${media.photographerId}/${media.video}`);
-            $source.setAttribute('type', 'video/mp4');
-    
-            const $video = document.createElement('video');
-            $video.setAttribute('controls', 'controls');
-            $video.appendChild($source);
-            $video.innerHTML = $video.innerHTML + 'Sorry, your browser doesn\'t support embedded videos.';
-    
-            $media.appendChild($video);
+            const videoCardTemplate = new VideoCard(media)
+            videoCardTemplate.createLightboxVideoCard();
         }
         const $title = document.querySelector('.lightbox__container__title');
         const title = media._title;
         $title.textContent = title;
+    }
+
+    reinitialize() {
+        const $mediaWrapper = document.querySelector('.lightbox__container__media');
+        const $titleWrapper = document.querySelector('.lightbox__container__title');
+        if ($mediaWrapper.firstChild) {
+            $mediaWrapper.firstChild.remove();
+        }
+        $titleWrapper.textContent = '';
     }
 
 

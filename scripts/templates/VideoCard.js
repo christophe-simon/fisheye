@@ -14,6 +14,7 @@ class VideoCard extends MediaCard {
 
         const $video = document.createElement('video');
         // $video.setAttribute('controls', 'controls');
+        $video.setAttribute('data-media-id', this._media.id);
         $video.appendChild($source);
         $video.innerHTML = $video.innerHTML + 'Sorry, your browser doesn\'t support embedded videos.';
 
@@ -72,4 +73,18 @@ class VideoCard extends MediaCard {
         // $wrapper.innerHTML = movieCard
         // return $wrapper
     }
+
+    createLightboxVideoCard() {
+        const $source = document.createElement('source');
+        $source.setAttribute('src', `assets/medias/${this._media.photographerId}/${this._media.video}`);
+        $source.setAttribute('type', 'video/mp4');
+
+        const $video = document.createElement('video');
+        $video.setAttribute('controls', 'controls');
+        $video.setAttribute('data-media-id', this._media.id);
+        $video.appendChild($source);
+        $video.innerHTML = $video.innerHTML + 'Sorry, your browser doesn\'t support embedded videos.';
+
+        $mediaWrapper.appendChild($video);
+    }    
 }

@@ -11,6 +11,7 @@ class ImageCard extends MediaCard {
         const $img = document.createElement('img');
         $img.setAttribute('src', `assets/medias/${this._media.photographerId}/${this._media.image}`);
         $img.setAttribute('alt', '');
+        $img.setAttribute('data-media-id', this._media.id);
  
         $media.appendChild($img);
 
@@ -85,4 +86,12 @@ class ImageCard extends MediaCard {
         // $wrapper.innerHTML = movieCard
         // return $wrapper
     }
+
+    createLightboxImageCard() {
+        const $img = document.createElement('img');
+        $img.setAttribute('src', `assets/medias/${this._media.photographerId}/${this._media.image}`);
+        $img.setAttribute('alt', '');
+        $img.setAttribute('data-media-id', this._media.id);
+        $mediaWrapper.appendChild($img);
+    }  
 }

@@ -1,20 +1,20 @@
-/**
- * Display the lightbox
- */
- function displayLightbox(array, index) {
-    const $lightbox = document.querySelector('lightbox');
-	$lightbox.style.display = 'block';
-    const $media = document.querySelector('.lightbox__container__media');
-    if (media === image)
-    $media
-    const $title = document.querySelector('.lightbox__container__title');
-}
+const $mediaWrapper = document.querySelector('.lightbox__container__media');
 
-/**
- * Close the lightbox
- */
-function closeLightbox() {
-    const lightbox = document.querySelector('lightbox');
-    lightbox.style.display = 'none';
+function calculateIndexOfMedia() {
+    let index;
+    if ($mediaWrapper.firstChild) {
+        if ($mediaWrapper.firstChild.tagName === 'IMG') {
+            const $img = document.querySelector('.lightbox__container__media img');
+            const currentImagePath = $img.src;
+            index = medias.findIndex((media) => currentImagePath.endsWith(media._image) === true);
+        } else if ($mediaWrapper.firstChild.tagName === 'VIDEO') {
+            currentMediaType = 'video';
+            const $video = document.querySelector('.lightbox__container__media video');
+            const currentVideoPath = $video.firstChild.src;
+            index = medias.findIndex((media) => currentVideoPath.endsWith(media._video) === true);
+        }
+        return index;
+    }
+    return NaN;
 }
 
