@@ -13,7 +13,7 @@ class VideoCard extends MediaCard {
         $source.setAttribute('type', 'video/mp4');
 
         const $video = document.createElement('video');
-        $video.setAttribute('controls', 'controls');
+        // $video.setAttribute('controls', 'controls');
         $video.appendChild($source);
         $video.innerHTML = $video.innerHTML + 'Sorry, your browser doesn\'t support embedded videos.';
 

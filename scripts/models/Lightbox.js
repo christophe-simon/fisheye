@@ -30,7 +30,7 @@
     // }
 
     display() {
-        const $lightbox = document.querySelector('.lightbox');
+        const $lightbox = document.getElementById('lightbox');
         $lightbox.style.display = 'block';
         const $media = document.querySelector('.lightbox__container__media');
         const media = this._array[this._position];
@@ -100,7 +100,7 @@
         //     this.element.parentElement.removeChild(this.element)
         // }, 500)
         // document.removeEventListener('keyup', this.onKeyUp);
-        const $lightbox = document.querySelector('lightbox');
+        const $lightbox = document.getElementById('lightbox');
         $lightbox.style.display = 'none';
     }
 
@@ -135,25 +135,27 @@
      * @param {string} url URL of the media
      * @return {HTMLElement}
      */
-    buildLightbox(title, url) {
-        const lightbox = document.querySelector('.lightbox');
-        lightbox.innerHTML = `<button class="lightbox__close">Fermer<i class="fa-solid fa-xmark"></i></button>
-        <button class="lightbox__next">Suivant<i class="fa-solid fa-angle-right"></i></button>
-        <button class="lightbox__prev">Précédent<i class="fa-solid fa-angle-left"></i></button>
-        <div class="lightbox__container">
-            <div class="lightbox__container__media">
-                <!--<div class="lightbox__loader"></div>-->
-                <img src="${url}" alt="">
-            </div>
-            <p class="lightbox__container__title">
-                ${title}
-            </p>
-        </div>`;
+    // buildLightbox(title, url) {
+    //     const lightbox = document.getElementById('lightbox');
+    //     lightbox.innerHTML = `<button class="lightbox__close">Fermer<i class="fa-solid fa-xmark"></i></button>
+    //     <button class="lightbox__next">Suivant<i class="fa-solid fa-angle-right"></i></button>
+    //     <button class="lightbox__prev">Précédent<i class="fa-solid fa-angle-left"></i></button>
+    //     <div class="lightbox__container1">
+    //         <div class="lightbox__container2">
+    //             <div class="lightbox__container__media">
+    //                 <!--<div class="lightbox__loader"></div>-->
+    //                 <img src="${url}" alt="">
+    //             </div>
+    //             <p class="lightbox__container__title">
+    //                 ${title}
+    //             </p>
+    //         </div>
+    //     </div>`;
         /*dom.querySelector('.lightbox__close').addEventListener('click', this.close.bind(this));
         dom.querySelector('.lightbox__next').addEventListener('click', this.next.bind(this));
         dom.querySelector('.lightbox__prev').addEventListener('click', this.prev.bind(this));*/
-        return lightbox;
-    }
+    //     return lightbox;
+    // }
 
 }
 

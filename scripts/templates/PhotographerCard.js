@@ -8,7 +8,7 @@ class PhotographerCard {
         const $link = document.createElement('a');
         $link.classList.add('photographer_card__link');
         $link.href = `photographer.html?photographer=${this._photographer.id}`;
-        $link.setAttribute('tabindex', 1);
+        $link.setAttribute('tabindex', 0);
         $link.setAttribute('aria-label', this._photographer.name);
 
         // a.photographer_card__link contains the picture of the photographer

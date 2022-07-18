@@ -79,7 +79,7 @@ class App {
             });
 
             // DOM variables
-            const $lightbox = document.querySelector('.lightbox');
+            const $lightbox = document.getElementById('lightbox');
             const $lightboxCloseButton = document.querySelector('.lightbox__close');
             const $lightboxNextButton = document.querySelector('.lightbox__next');
             const $lightboxPreviousButton = document.querySelector('.lightbox__prev');
