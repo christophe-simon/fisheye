@@ -68,9 +68,31 @@ class App {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
                     const lightbox = new Lightbox(mediasOfThisPhotographer, index);
+                    console.log('index ' + index);
                     lightbox.reinitialize();
                     lightbox.display();
                 })
+            });
+
+            const $hearts = document.querySelectorAll('.heart');
+            console.log($hearts);
+            $hearts.forEach((heart) => {
+                heart.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    heart.classList.toggle('liked');
+                    let numberOfLikes = parseInt(heart.parentElement.firstChild);
+                    console.log(numberOfLikes);
+                    if (heart.classList.contains('liked')) {
+                        numberOfLikes++;
+                        console.log(numberOfLikes);
+                    } else {
+                        numberOfLikes++;
+                        console.log(numberOfLikes);
+                    }
+                });
+
+                // heart.addEventListener('keypress', toggleLikes);
             });
 
             const $lightbox = document.getElementById('lightbox');
@@ -87,7 +109,7 @@ class App {
             $lightboxNextButton.addEventListener('click', () => {
 
                 let mediaId = parseInt($mediaWrapper.firstChild.dataset.mediaId);
-                let index = mediasOfThisPhotographer.findIndex((media) => media._id == mediaId);
+                let index = mediasOfThisPhotographer.findIndex((media) => media._id === mediaId);
                 let indexOfNextMedia = (index !== (mediasOfThisPhotographer.length - 1) ? index + 1 : 0);
 
                 if ($mediaWrapper.firstChild) {

@@ -26,4 +26,5 @@ class Media {
     get price() {
         return this._price;
     }
+
 }
