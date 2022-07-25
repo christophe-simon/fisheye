@@ -136,8 +136,12 @@
     text-align: right;
 }
 
-.heart {
-    z-index: 10;
+.media_card__description__popularity.liked {
+    font-weight: bold;
+}
+
+.media_card__description__popularity .heart {
+    cursor: pointer;
 }
 
 

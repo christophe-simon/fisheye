@@ -4,21 +4,19 @@ class ImageCard extends MediaCard {
     }
 
     createImageCard() {
-        const $link = document.createElement('a');
-        $link.setAttribute('href', `assets/medias/${this._media.photographerId}/${this._media.image}`);
+        const $mediaCard = document.createElement('article');
+        $mediaCard.classList.add('media_card');
         const mediaCard = `
-            <article class="media_card">
-                <div class="media_card__media">
-                    <img src="assets/medias/${this._media.photographerId}/${this._media.image}" alt="" data-media-id=${this._media.id}>
-                </div>
-                <div class="media_card__description">
-                    <h2 class="media_card__description__title">${this._media.title}</h2>
-                    <p class="media_card__description__popularity"><span class="number_of_likes">${this._media.likes}</span> <a href="#" class="heart"><i class="fa-solid fa-heart" aria-label="likes"></i></a></p>
-                </div>
-            </article>
+            <a href="assets/medias/${this._media.photographerId}/${this._media.image}" class="media_card__media">
+                <img src="assets/medias/${this._media.photographerId}/${this._media.image}" alt="" data-media-id=${this._media.id}>
+            </a>
+            <div class="media_card__description">
+                <h2 class="media_card__description__title">${this._media.title}</h2>
+                <p class="media_card__description__popularity"><span class="number_of_likes">${this._media.likes}</span> <span class="heart"><i class="fa-solid fa-heart" aria-label="likes"></i></span></p>
+            </div>
         `;
-        $link.innerHTML = mediaCard
-        return $link;
+        $mediaCard.innerHTML = mediaCard
+        return $mediaCard;
 
         // // Creation of div.media_card__media
         // const $media = document.createElement('div');
@@ -88,10 +86,13 @@ class ImageCard extends MediaCard {
     }
 
     createLightboxImageCard() {
+        const $mediaWrapper = document.querySelector('.lightbox__container__media');
+
         const $img = document.createElement('img');
         $img.setAttribute('src', `assets/medias/${this._media.photographerId}/${this._media.image}`);
         $img.setAttribute('alt', '');
         $img.setAttribute('data-media-id', this._media.id);
+        
         $mediaWrapper.appendChild($img);
     }  
 }

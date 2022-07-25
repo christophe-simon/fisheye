@@ -17,47 +17,39 @@ class Aside {
     }
 
     createAside() {
+        const wrapper = `
+            <span class="aside__total_likes">
+                <span id="total_number_of_likes">${this.getTotalLikes()}</span> <i class="fa-solid fa-heart" aria-label="likes"></i>
+            </span>
+            <span class="aside__daily_price">
+                250€/jour
+            </span>
+        `;
+        return wrapper;
+
+
+
+        // Other way to write it:
+
         // Creation of span.aside__total_likes
-        const asideTotalLikesElt = document.createElement('span');
-        asideTotalLikesElt.classList.add('aside__total_likes');
+        // const asideTotalLikesElt = document.createElement('span');
+        // asideTotalLikesElt.classList.add('aside__total_likes');
 
-        asideTotalLikesElt.innerHTML = `${this.getTotalLikes()} <i class="fa-solid fa-heart" aria-label="likes"></i>`;
+        // asideTotalLikesElt.innerHTML = `${this.getTotalLikes()} <i class="fa-solid fa-heart" aria-label="likes"></i>`;
 
-        // Creation of span.photographer_presentation__button
-        const asideDailyPriceElt = document.createElement('span');
-        asideDailyPriceElt.classList.add('aside__daily_price');
+        // // Creation of span.photographer_presentation__button
+        // const asideDailyPriceElt = document.createElement('span');
+        // asideDailyPriceElt.classList.add('aside__daily_price');
 
-        asideDailyPriceElt.textContent = `${this._photographer.price}€/jour`;
+        // asideDailyPriceElt.textContent = `${this._photographer.price}€/jour`;
 
-        // Creation of a blank element
-        const blankElt = document.createElement('div');
+        // // Creation of a blank element
+        // const blankElt = document.createElement('div');
 
-        blankElt.appendChild(asideTotalLikesElt);
-        blankElt.appendChild(asideDailyPriceElt);
+        // blankElt.appendChild(asideTotalLikesElt);
+        // blankElt.appendChild(asideDailyPriceElt);
 
-        return blankElt.innerHTML;
+        // return blankElt.innerHTML;
 
-        // Other way to write the code:
-
-        // const $wrapper = document.createElement('div')
-        // $wrapper.classList.add('movie-card-wrapper')
-
-        // const movieCard = `
-        //     <div class="movie-thumbnail center">
-        //         <img
-        //             alt="${this._movie.title}"
-        //             src="${this._movie.thumbnail}"
-        //         />
-        //     </div>
-        //     <h3 class="fs-16 center">${this._movie.title}</h3>
-        //     <p class="fs-14 center">
-        //         <span>${this._movie.released_in}</span>
-        //         -
-        //         <span>${this._movie.duration}</span>
-        //     </p>
-        // `
-        
-        // $wrapper.innerHTML = movieCard
-        // return $wrapper
     }
 }

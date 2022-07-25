@@ -15,7 +15,7 @@ class PhotographerPage {
         // div.photographer_presentation__data contains the place of the photographer
         const $place = document.createElement('p');
         $place.classList.add('place');
-        $place.textContent = this._photographer.place
+        $place.textContent = `${this._photographer.city}, ${this._photographer.country}`;
 
         // div.photographer_presentation__data contains the tagline of the photographer
         const $tagline = document.createElement('p');

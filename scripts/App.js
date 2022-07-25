@@ -63,93 +63,94 @@ class App {
             const $contactButton = document.querySelector('.contact_button');
             $contactButton.addEventListener('click', displayModal);
 
-            const $links = document.querySelectorAll('.photographer_portfolio__medias a');
-            $links.forEach((link, index) => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const lightbox = new Lightbox(mediasOfThisPhotographer, index);
-                    console.log('index ' + index);
-                    lightbox.reinitialize();
-                    lightbox.display();
-                })
-            });
-
             const $hearts = document.querySelectorAll('.heart');
-            console.log($hearts);
             $hearts.forEach((heart) => {
-                heart.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    heart.classList.toggle('liked');
-                    let numberOfLikes = parseInt(heart.parentElement.firstChild);
-                    console.log(numberOfLikes);
-                    if (heart.classList.contains('liked')) {
+                heart.addEventListener('click', () => {
+                    heart.parentElement.classList.toggle('liked');
+                    let numberOfLikes = parseInt(heart.parentElement.firstChild.textContent);
+                    let totalNumberOfLikes = parseInt(document.getElementById('total_number_of_likes').textContent);
+                    if (heart.parentElement.classList.contains('liked')) {
                         numberOfLikes++;
-                        console.log(numberOfLikes);
+                        totalNumberOfLikes++;
+
                     } else {
-                        numberOfLikes++;
-                        console.log(numberOfLikes);
+                        numberOfLikes--;
+                        totalNumberOfLikes--;
                     }
+                    heart.parentElement.firstChild.textContent = numberOfLikes;
+                    document.getElementById('total_number_of_likes').textContent = totalNumberOfLikes;
                 });
 
                 // heart.addEventListener('keypress', toggleLikes);
             });
 
-            const $lightbox = document.getElementById('lightbox');
+            const $links = document.querySelectorAll('.media_card__media');
+            $links.forEach((link, index) => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const lightbox = new Lightbox(mediasOfThisPhotographer, index);
+                    lightbox.reinitialize();
+                    lightbox.display();
+                })
+            });
+
+
+
+            // const $lightbox = document.getElementById('lightbox');
             const $lightboxCloseButton = document.querySelector('.lightbox__close');
             const $lightboxNextButton = document.querySelector('.lightbox__next');
             const $lightboxPreviousButton = document.querySelector('.lightbox__prev');
             const $mediaWrapper = document.querySelector('.lightbox__container__media');
             const $titleWrapper = document.querySelector('.lightbox__container__title');
 
+            // console.log($lightbox.getAttribute('open'));
+
             $lightboxCloseButton.addEventListener('click', () => {
+                // let mediaId = parseInt($mediaWrapper.firstChild.dataset.mediaId);
+                // let index = mediasOfThisPhotographer.findIndex((media) => media._id === mediaId);
+                // const lightbox = new Lightbox(mediasOfThisPhotographer, index);
                 lightbox.close();
             });
 
-            $lightboxNextButton.addEventListener('click', () => {
+            $lightboxCloseButton.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    // let mediaId = parseInt($mediaWrapper.firstChild.dataset.mediaId);
+                    // let index = mediasOfThisPhotographer.findIndex((media) => media._id === mediaId);
+                    // const lightbox = new Lightbox(mediasOfThisPhotographer, index);
+                    lightbox.close();
+                }
+            });
 
+            $lightboxNextButton.addEventListener('click', () => {
                 let mediaId = parseInt($mediaWrapper.firstChild.dataset.mediaId);
                 let index = mediasOfThisPhotographer.findIndex((media) => media._id === mediaId);
-                let indexOfNextMedia = (index !== (mediasOfThisPhotographer.length - 1) ? index + 1 : 0);
+                const lightbox = new Lightbox(mediasOfThisPhotographer, index);
+                lightbox.next(); 
+            });
 
-                if ($mediaWrapper.firstChild) {
-                    $mediaWrapper.firstChild.remove();
+            $lightboxNextButton.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    let mediaId = parseInt($mediaWrapper.firstChild.dataset.mediaId);
+                    let index = mediasOfThisPhotographer.findIndex((media) => media._id === mediaId);
+                    const lightbox = new Lightbox(mediasOfThisPhotographer, index);
+                    lightbox.next();
                 }
-                $titleWrapper.textContent = '';
-
-                const nextMedia = mediasOfThisPhotographer[indexOfNextMedia];
-                if (nextMedia instanceof Image) {
-                    const imageCardTemplate = new ImageCard(mediasOfThisPhotographer[indexOfNextMedia]);
-                    imageCardTemplate.createLightboxImageCard();
-                } else if (nextMedia instanceof Video) {
-                    const videoCardTemplate = new VideoCard(mediasOfThisPhotographer[indexOfNextMedia])
-                    videoCardTemplate.createLightboxVideoCard();
-                }
-                $titleWrapper.textContent = mediasOfThisPhotographer[indexOfNextMedia]._title;
-                
             });
 
             $lightboxPreviousButton.addEventListener('click', () => {
-
                 let mediaId = parseInt($mediaWrapper.firstChild.dataset.mediaId);
                 let index = mediasOfThisPhotographer.findIndex((media) => media._id === mediaId);
-                let indexOfPreviousMedia = (index !== 0 ? index - 1 : mediasOfThisPhotographer.length - 1);
+                const lightbox = new Lightbox(mediasOfThisPhotographer, index);
+                lightbox.previous();
+            });
 
-                if ($mediaWrapper.firstChild) {
-                    $mediaWrapper.firstChild.remove();
+            $lightboxPreviousButton.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    let mediaId = parseInt($mediaWrapper.firstChild.dataset.mediaId);
+                    let index = mediasOfThisPhotographer.findIndex((media) => media._id === mediaId);
+                    const lightbox = new Lightbox(mediasOfThisPhotographer, index);
+                    lightbox.previous();
                 }
-                $titleWrapper.textContent = '';
-
-                const previousMedia = mediasOfThisPhotographer[indexOfPreviousMedia];
-                if (previousMedia instanceof Image) {
-                    const imageCardTemplate = new ImageCard(mediasOfThisPhotographer[indexOfPreviousMedia]);
-                    imageCardTemplate.createLightboxImageCard();
-                } else if (previousMedia instanceof Video) {
-                    const videoCardTemplate = new VideoCard(mediasOfThisPhotographer[indexOfPreviousMedia])
-                    videoCardTemplate.createLightboxVideoCard();
-                }
-                $titleWrapper.textContent = mediasOfThisPhotographer[indexOfPreviousMedia]._title;
-
             });
 
             // Addition of the name of the photographer in the modal window title
