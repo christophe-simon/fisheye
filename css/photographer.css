@@ -73,6 +73,83 @@
     border-radius: 50%;
 }
 
+
+
+
+
+.photographer_portfolio__sorted_by {
+    display: flex;
+}
+
+.photographer_portfolio__sorted_by .legend {
+    width: 120px;
+}
+
+.photographer_portfolio__sorted_by .dropdown_menu {
+    display: flex;
+    flex-direction: column;
+    padding: 0px 10px;
+    background: #901C1C;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.photographer_portfolio__sorted_by .dropdown_menu .listbox {
+    position: relative;
+    width: 130px;
+    color: #fff;
+}
+
+.photographer_portfolio__sorted_by .dropdown_menu .listbox .active-option {
+    margin: 0;
+    padding: 20px 0px;
+}
+
+.photographer_portfolio__sorted_by .dropdown_menu .listbox i {
+    position: absolute;
+    right: 10px;
+    top: 23px;
+}
+
+.photographer_portfolio__sorted_by .dropdown_menu button {
+    font-family: inherit;
+    border: unset;
+    background: inherit;
+    font-size: inherit;
+    color: #fff;
+    padding: 20px 0px;
+    width: 130px;
+    text-align: start;
+    display: none;
+    cursor: pointer;
+}
+
+.photographer_portfolio__sorted_by .dropdown_menu > button:first-of-type {
+    border-top: 1px solid #fff; 
+    border-bottom: 1px solid #fff
+}
+
+.photographer_portfolio__sorted_by .fa-angle-up{
+    display: none;
+}
+
+.photographer_portfolio__sorted_by .hidden {
+    display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 .photographer_portfolio__sorted_by {
     font-family: 'DM Sans';
     font-style: normal;
