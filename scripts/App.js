@@ -216,17 +216,17 @@ const manageSortingDropdownMenuFunctionality = (array) => {
             switch (element.value) {
                 case 'popularity':
                 array.sort(function (a, b) {
-                    return b.likes - a.likes;
+                    return b._likes - a._likes;
                 });
                 break;
                 case 'date':
-                array.sort(function (a, b) {
-                    return new Date(b.date) - new Date(a.date);
+                    array.sort(function (a, b) {
+                    return new Date(b._date) - new Date(a._date);
                 });
                 break;
                 case 'title':
                 array.sort(function (a, b) {
-                    return a.title.localeCompare(b.title);
+                    return a._title.localeCompare(b._title);
                 });
                 break;
             }
