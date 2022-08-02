@@ -34,7 +34,7 @@ class App {
             const mediasData = await this._mediaApi.getMediasDataByPhotographerId(photographerId);
 
             const mediasOfThisPhotographer = displayMedias(mediasData);
-            console.log(mediasOfThisPhotographer);
+            // console.log(mediasOfThisPhotographer);
 
             const $asideWrapper = document.querySelector('.aside');
             const asideTemplate = new Aside(photographer, mediasData);
@@ -215,22 +215,18 @@ const manageSortingDropdownMenuFunctionality = (array) => {
 
             switch (element.value) {
                 case 'popularity':
-                array.sort(function (a, b) {
-                    return b._likes - a._likes;
-                });
+                    array.sort((a, b) => b._likes - a._likes);
                 break;
                 case 'date':
-                    array.sort(function (a, b) {
-                    return new Date(b._date) - new Date(a._date);
-                });
+                    array.sort((a, b) => new Date(b._date) - new Date(a._date));
+                    array.forEach((elt) => console.log(elt._date))
                 break;
                 case 'title':
-                array.sort(function (a, b) {
-                    return a._title.localeCompare(b._title);
-                });
+                    array.sort((a, b) => a._title.localeCompare(b._title));
                 break;
             }
 
+            
             displayMedias(array);
             manageClickOnHeartsBehaviour();
             manageLighboxFunctionalities(array);
@@ -359,14 +355,14 @@ const manageLighboxFunctionalities = (array) => {
         lightbox.next(); 
     });
 
-    $lightboxNextButton.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            let mediaId = parseInt($mediaWrapper.firstChild.dataset.mediaId);
-            let index = array.findIndex((media) => media._id === mediaId);
-            const lightbox = new Lightbox(array, index);
-            lightbox.next();
-        }
-    });
+    // $lightboxNextButton.addEventListener('keypress', (e) => {
+    //     if (e.key === 'Enter') {
+    //         let mediaId = parseInt($mediaWrapper.firstChild.dataset.mediaId);
+    //         let index = array.findIndex((media) => media._id === mediaId);
+    //         const lightbox = new Lightbox(array, index);
+    //         lightbox.next();
+    //     }
+    // });
 
     $lightboxPreviousButton.addEventListener('click', () => {
         let mediaId = parseInt($mediaWrapper.firstChild.dataset.mediaId);

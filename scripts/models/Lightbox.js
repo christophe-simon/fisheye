@@ -1,7 +1,3 @@
-
-/**
- * property {HTMLElement} element
- */
  class Lightbox {
 
     constructor(array, position) {
@@ -46,6 +42,9 @@
         let mediaId = parseInt($mediaWrapper.firstChild.dataset.mediaId);
         let index = this._array.findIndex((media) => media._id === mediaId);
         let indexOfNextMedia = (index !== (this._array.length - 1) ? index + 1 : 0);
+        console.log('mediaId: ' + mediaId);
+        console.log('index: ' + index);
+        console.log('indexOfNextMedia: ' + indexOfNextMedia);
 
         if ($mediaWrapper.firstChild) {
             $mediaWrapper.firstChild.remove();
@@ -53,10 +52,13 @@
         $titleWrapper.textContent = '';
 
         const nextMedia = this._array[indexOfNextMedia];
+        console.log('nextMedia: ' , nextMedia);
         if (nextMedia instanceof Image) {
+            console.log('nextMedia est une image');
             const imageCardTemplate = new ImageCard(this._array[indexOfNextMedia]);
             imageCardTemplate.createLightboxImageCard();
         } else if (nextMedia instanceof Video) {
+            console.log('nextMedia est une video');
             const videoCardTemplate = new VideoCard(this._array[indexOfNextMedia])
             videoCardTemplate.createLightboxVideoCard();
         }
