@@ -25,10 +25,34 @@
     reinitialize() {
         const $mediaWrapper = document.querySelector('.lightbox__container__media');
         const $titleWrapper = document.querySelector('.lightbox__container__title');
+        const $lightboxNextButton = document.querySelector('.lightbox__next');
+        const $lightboxPreviousButton = document.querySelector('.lightbox__prev');
         if ($mediaWrapper.firstChild) {
             $mediaWrapper.firstChild.remove();
         }
         $titleWrapper.textContent = '';
+
+        // $lightboxNextButton.removeEventListener('click', goToNextMedia);
+    
+        // $lightboxNextButton.removeEventListener('keypress', (e) => {
+        //     if (e.key === 'Enter') {
+        //         let mediaId = parseInt($mediaWrapper.firstChild.dataset.mediaId);
+        //         let index = array.findIndex((media) => media._id === mediaId);
+        //         const lightbox = new Lightbox(array, index);
+        //         lightbox.next();
+        //     }
+        // });
+    
+        // $lightboxPreviousButton.removeEventListener('click', goToPreviousMedia);
+    
+        // $lightboxPreviousButton.removeEventListener('keypress', (e) => {
+        //     if (e.key === 'Enter') {
+        //         let mediaId = parseInt($mediaWrapper.firstChild.dataset.mediaId);
+        //         let index = array.findIndex((media) => media._id === mediaId);
+        //         const lightbox = new Lightbox(array, index);
+        //         lightbox.previous();
+        //     }
+        // });
     }
 
     close() {
@@ -43,7 +67,7 @@
         let index = this._array.findIndex((media) => media._id === mediaId);
         let indexOfNextMedia = (index !== (this._array.length - 1) ? index + 1 : 0);
         console.log('mediaId: ' + mediaId);
-        console.log('index: ' + index);
+        console.log('index: ' + index);  
         console.log('indexOfNextMedia: ' + indexOfNextMedia);
 
         if ($mediaWrapper.firstChild) {

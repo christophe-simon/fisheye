@@ -25,8 +25,10 @@ class PhotographerCard {
         $link.appendChild($name);
 
         // We add the possibility to "click" on the link by pressing the "Enter" key while the link is focused
-        $link.addEventListener('keypress', () => {
-            window.location.href = `photographer.html?photographer=${this._photographer.id}`;
+        $link.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                window.location.href = `photographer.html?photographer=${this._photographer.id}`;
+            }
         });
 
         // 2. Creation of div.photographer_card__description

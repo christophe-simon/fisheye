@@ -42,7 +42,7 @@ class App {
 
             manageClickOnHeartsBehaviour();
             manageLighboxFunctionalities(mediasOfThisPhotographer);
-
+            
 
             manageSortingDropdownMenuFunctionality(mediasOfThisPhotographer);
 
@@ -306,11 +306,13 @@ const manageSortingDropdownMenuFunctionality = (array) => {
 
 const manageLighboxFunctionalities = (array) => {
     const $links = document.querySelectorAll('.media_card__media');
+    
     $links.forEach((link, index) => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const lightbox = new Lightbox(array, index);
             lightbox.reinitialize();
+            lightbox.close();
             lightbox.display();
         })
         // .addEventListener('keypress', (e) => {
@@ -330,8 +332,6 @@ const manageLighboxFunctionalities = (array) => {
     const $mediaWrapper = document.querySelector('.lightbox__container__media');
     const $titleWrapper = document.querySelector('.lightbox__container__title');
 
-    // console.log($lightbox.getAttribute('open'));
-
     $lightboxCloseButton.addEventListener('click', () => {
         let mediaId = parseInt($mediaWrapper.firstChild.dataset.mediaId);
         let index = array.findIndex((media) => media._id === mediaId);
@@ -348,12 +348,15 @@ const manageLighboxFunctionalities = (array) => {
         }
     });
 
-    $lightboxNextButton.addEventListener('click', () => {
-        let mediaId = parseInt($mediaWrapper.firstChild.dataset.mediaId);
-        let index = array.findIndex((media) => media._id === mediaId);
-        const lightbox = new Lightbox(array, index);
-        lightbox.next(); 
-    });
+    $lightboxNextButton.addEventListener('click', goToNextMedia(array));
+
+    // $lightboxNextButton.addEventListener('click', () => {
+    //     let mediaId = parseInt($mediaWrapper.firstChild.dataset.mediaId);
+    //     console.log(mediaId);
+    //     let index = array.findIndex((media) => media._id === mediaId);
+    //     const lightbox = new Lightbox(array, index);
+    //     lightbox.next();
+    // });
 
     // $lightboxNextButton.addEventListener('keypress', (e) => {
     //     if (e.key === 'Enter') {
@@ -364,12 +367,7 @@ const manageLighboxFunctionalities = (array) => {
     //     }
     // });
 
-    $lightboxPreviousButton.addEventListener('click', () => {
-        let mediaId = parseInt($mediaWrapper.firstChild.dataset.mediaId);
-        let index = array.findIndex((media) => media._id === mediaId);
-        const lightbox = new Lightbox(array, index);
-        lightbox.previous();
-    });
+    $lightboxPreviousButton.addEventListener('click', goToPreviousMedia);
 
     $lightboxPreviousButton.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
@@ -380,6 +378,26 @@ const manageLighboxFunctionalities = (array) => {
         }
     });
 
+}
+
+function goToNextMedia(array) {
+    const $mediaWrapper = document.querySelector('.lightbox__container__media');
+    console.log($mediaWrapper.children.length);
+    if ($mediaWrapper.children.length !== 0) {
+        let mediaId = parseInt($mediaWrapper.firstChild.dataset.mediaId);
+        console.log(mediaId);
+        let index = array.findIndex((media) => media._id === mediaId);
+        const lightbox = new Lightbox(array, index);
+        lightbox.next();
+    }
+}
+
+function goToPreviousMedia() {
+    const $mediaWrapper = document.querySelector('.lightbox__container__media');
+    let mediaId = parseInt($mediaWrapper.firstChild.dataset.mediaId);
+    let index = array.findIndex((media) => media._id === mediaId);
+    const lightbox = new Lightbox(array, index);
+    lightbox.previous();
 }
 
 const currentPage = document.location.pathname;
