@@ -6,7 +6,15 @@
     }
 
     display() {
+        const $header = document.getElementById('header');
+        const $main = document.getElementById('main');
         const $lightbox = document.getElementById('lightbox');
+        const $modal = document.getElementById('contact_modal');
+        $header.setAttribute('aria-hidden', 'true');
+        $main.setAttribute('aria-hidden', 'true');
+        $lightbox.setAttribute('aria-hidden', 'false');
+        $modal.setAttribute('aria-hidden', 'true');
+        $lightbox.style.display = 'block';
         $lightbox.showModal();
         const media = this._array[this._position];
         
@@ -20,6 +28,15 @@
         const $title = document.querySelector('.lightbox__container__title');
         const title = media._title;
         $title.textContent = title;
+
+
+
+        const $body = document.getElementById('body');
+        const $firstName = document.getElementById('first_name');
+        $body.classList.add('no-scroll');
+        $modal.style.display = 'block';
+        initializeModal();
+        $firstName.focus();
     }
 
     reinitialize() {
@@ -56,7 +73,15 @@
     }
 
     close() {
+        const $header = document.getElementById('header');
+        const $main = document.getElementById('main');
         const $lightbox = document.getElementById('lightbox');
+        const $modal = document.getElementById('contact_modal');
+        $header.setAttribute('aria-hidden', 'false');
+        $main.setAttribute('aria-hidden', 'false');
+        $lightbox.setAttribute('aria-hidden', 'true');
+        $modal.setAttribute('aria-hidden', 'true');
+        $lightbox.style.display = 'none';
         $lightbox.close();
     }
 

@@ -7,15 +7,15 @@ class VideoCard extends MediaCard {
         const $mediaCard = document.createElement('article');
         $mediaCard.classList.add('media_card');
         const mediaCard = `
-            <a href="assets/medias/${this._media.photographerId}/${this._media.video}" class="media_card__media">
+            <div class="media_card__media" tabindex="0" aria-labelleby="media_card__description__title">
                 <video data-media-id=${this._media.id}>
                     <source src="assets/medias/${this._media.photographerId}/${this._media.video}" type="video/mp4">
-                    Sorry, your browser doesn't support embedded videos.
+                    Désolé, votre navigateur ne permet pas de lire les vidéos.
                 </video>
-            </a>
+            </div>
             <div class="media_card__description">
-                <h2 class="media_card__description__title">${this._media.title}</h2>
-                <p class="media_card__description__popularity"><span class="number_of_likes">${this._media.likes}</span> <span class="heart"><i class="fa-solid fa-heart" aria-label="likes"></i></span></p>
+                <h2 id="media_card__description__title" class="media_card__description__title">${this._media.title}</h2>
+                <p class="media_card__description__popularity"><span class="number_of_likes">${this._media.likes}</span> <span class="heart"><i class="fa-solid fa-heart" tabindex="0" aria-label="Cliquez pour liker le média"></i></span></p>
             </div>
         `;
         $mediaCard.innerHTML = mediaCard;

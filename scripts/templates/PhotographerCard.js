@@ -8,13 +8,13 @@ class PhotographerCard {
         const $link = document.createElement('a');
         $link.classList.add('photographer_card__link');
         $link.href = `photographer.html?photographer=${this._photographer.id}`;
-        $link.setAttribute('tabindex', 0);
+        $link.setAttribute('tabindex', '0');
         $link.setAttribute('aria-label', this._photographer.name);
 
         // a.photographer_card__link contains the picture of the photographer
         const $img = document.createElement('img');
         $img.setAttribute('src', this._photographer.portrait);
-        $img.setAttribute('alt', `picture of ${this._photographer.name}`);
+        $img.setAttribute('alt', this._photographer.name);
 
         // a.photographer_card__link contains the name of the photographer
         const $name = document.createElement('h2');

@@ -9,14 +9,8 @@ const $emailErrorMessage = document.querySelector('#email_data p.error_message')
 const $messageErrorMessage = document.querySelector('#message_data p.error_message');
 
 // Regex variables
-const NAME_REGEX = /^[a-zA-ZáéíóúýÁÉÍÓÚÝàèìòùÀÈÌÒÙäëïöüÿÄËÏÖÜŸçÇæœÆŒåÅßøØãñõÃÑÕ']{2,}$/;
-const nameRegex = new RegExp(NAME_REGEX);
-
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const emailRegex = new RegExp(EMAIL_REGEX);
-
-const MESSAGE_REGEX = /^.[\n\r]{20,}$/;
-const messageRegex = new RegExp(MESSAGE_REGEX);
 
 // Constants
 const FIRST_NAME_ELT = '$firstName';
@@ -94,7 +88,15 @@ const manageValidation = function (evt) {
     evt.preventDefault();
 
     if (isFormValid()) {
-        console.log('Le formulaire a été validé');
+        const firstName = $firstName.value;
+        const lastName = $lastName.value;
+        const email = $email.value;
+        const message = $message.value;
+        console.log('Le formulaire a été validé. Voici les informations.');
+        console.log('Prénom: ' + firstName);
+        console.log('Nom: ' + lastName);
+        console.log('Email: ' + email);
+        console.log('Message: ' + message);
         const $form = document.querySelector('form');
         $form.style.display = 'none';
         const $validationMessage = document.getElementById('successful_sending');

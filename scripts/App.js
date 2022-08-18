@@ -32,9 +32,8 @@ class App {
             this.$specificPhotographerWrapper.innerHTML = photographerPageTemplate.createPhotographerPage();
             
             const mediasData = await this._mediaApi.getMediasDataByPhotographerId(photographerId);
-
-            const mediasOfThisPhotographer = displayMedias(mediasData);
-            // console.log(mediasOfThisPhotographer);
+            const mediasSortedByPopularity = mediasData.sort((a, b) => b.likes - a.likes);
+            const mediasOfThisPhotographer = displayMedias(mediasSortedByPopularity);
 
             const $asideWrapper = document.querySelector('.aside');
             const asideTemplate = new Aside(photographer, mediasData);
@@ -61,10 +60,10 @@ class App {
             const $modalTitle = document.querySelector('.modal header h2');
             $modalTitle.innerHTML = `Contactez-moi<br>${photographer.name}`;
             
-            // Creation of the addEventListener on the close button of the modal
-            const $modalCloseButton = document.querySelector('.modal header img');
-            $modalCloseButton.addEventListener('click', closeModal);
-            $modalCloseButton.addEventListener('keypress', (e) => {
+            // Creation of the addEventListener on the modal closure button
+            const $modalClosureButton = document.getElementById('modal_closure');
+            $modalClosureButton.addEventListener('click', closeModal);
+            $modalClosureButton.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') {
                     closeModal;
                 }
@@ -163,10 +162,10 @@ const manageClickOnHeartsBehaviour = () => {
 
 const manageSortingDropdownMenuFunctionality = (array) => {
     const $listbox = document.querySelector('.listbox');
-    const $sortingOptions = Array.from(document.querySelectorAll('.sorting_option'));
     const $angleUp = document.querySelector('.fa-angle-up');
     const $angleDown = document.querySelector('.fa-angle-down');
-    const $optionShown = document.querySelectorAll('.dropdown_menu > button');
+    const $sortingOptions = Array.from(document.querySelectorAll('.sorting_option'));
+    const $optionsShown = document.querySelectorAll('.dropdown_menu > button');
     let fullyExpandedMenu = false;
 
     $listbox.addEventListener('click', () => {
@@ -177,9 +176,10 @@ const manageSortingDropdownMenuFunctionality = (array) => {
             $sortingOptions.forEach((option) => {
                 option.style.display = 'block';
             });
-            $optionShown[0].focus();
             fullyExpandedMenu = true;
             $angleUp.style.display = 'block';
+            $listbox.setAttribute('aria-expanded', 'true');
+            $optionsShown[0].focus();
         } else {
             $sortingOptions.forEach((option) => {
                 option.style.display = 'none';
@@ -188,26 +188,26 @@ const manageSortingDropdownMenuFunctionality = (array) => {
         }
     });
 
-    $listbox.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            if ($angleDown !== null) {
-                $angleDown.style.display = 'none';
-            }
-            if (fullyExpandedMenu === false) {
-                $sortingOptions.forEach((option) => {
-                    option.style.display = 'block';
-                });
-                $optionShown[0].focus();
-                fullyExpandedMenu = true;
-                $angleUp.style.display = 'block';
-            } else {
-                $sortingOptions.forEach((option) => {
-                    option.style.display = 'none';
-                });
-                fullyExpandedMenu = false;
-            }
-        }
-    });
+    // $listbox.addEventListener('keypress', (e) => {
+    //     if (e.key === 'Enter') {
+    //         if ($angleDown !== null) {
+    //             $angleDown.style.display = 'none';
+    //         }
+    //         if (fullyExpandedMenu === false) {
+    //             $sortingOptions.forEach((option) => {
+    //                 option.style.display = 'block';
+    //             });
+    //             $optionShown[0].focus();
+    //             fullyExpandedMenu = true;
+    //             $angleUp.style.display = 'block';
+    //         } else {
+    //             $sortingOptions.forEach((option) => {
+    //                 option.style.display = 'none';
+    //             });
+    //             fullyExpandedMenu = false;
+    //         }
+    //     }
+    // });
 
     $sortingOptions.forEach((element) =>
         element.addEventListener('click', () => {
@@ -232,25 +232,29 @@ const manageSortingDropdownMenuFunctionality = (array) => {
             manageLighboxFunctionalities(array);
 
             // new list of options
-            const $hiddenButton = document.querySelector('.hidden button');
+            let $hiddenButton = document.querySelector('.dropdown_menu .hidden button');
             const $activeOption = document.querySelector('.active_option');
-            const currentButtonPos = $sortingOptions.indexOf(element);
-            const clickedOptionValue = $sortingOptions[currentButtonPos].innerText;
+            const clickedOptionPosition = $sortingOptions.indexOf(element);
+            const clickedOptionValue = $sortingOptions[clickedOptionPosition].innerText;
+
             $activeOption.innerText = clickedOptionValue;
-            $listbox.setAttribute('aria-label', `liste de tri, trié par ${clickedOptionValue}`);
+            $listbox.setAttribute('aria-label', `tri des médias par ${clickedOptionValue.toLowerCase()}`);
+            $listbox.setAttribute('aria-expanded', 'false');
+            document.querySelector('.dropdown_menu .hidden').appendChild(element);
             document.querySelector('.dropdown_menu').appendChild($hiddenButton);
-            document.querySelector('.hidden').appendChild(element);
             
-            // close the sortwidget after clicking on an option
-            $sortingOptions.forEach((option) => {
-                option.style.display = 'none';
-            });
+            $hiddenButton = document.querySelector('.dropdown_menu .hidden button');
+            const $optionsShown = document.querySelectorAll('.dropdown_menu > button');
             
             fullyExpandedMenu = false;
-            $listbox.focus();
-
-
             $angleUp.style.display = 'none';
+            $hiddenButton.setAttribute('aria-selected', 'true');
+            $optionsShown.forEach((option) => {
+                option.style.display = 'none';
+                option.setAttribute('aria-selected', 'false');
+            });
+            $listbox.focus();
+            
         })
 
         // element.addEventListener('keypress', (e) => {

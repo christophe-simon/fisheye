@@ -12,8 +12,8 @@
         <title>Fisheye - photographe</title>
         <script src="https://kit.fontawesome.com/b8c7d27c0a.js" crossorigin="anonymous"></script>
     </head>
-    <body>
-        <header role="banner">
+    <body id="body">
+        <header id="header" role="banner" aria-hidden="false">
             <a href="/index.html">
                 <img
                     src="assets/medias/logo.png"
@@ -22,13 +22,13 @@
                 />
             </a>
         </header>
-        <main id="main">
+        <main id="main" aria-hidden="false">
             <div class="photographer_data"></div>
         </main>
-        <dialog id="lightbox" role="dialog">
-            <button class="lightbox__close">Fermer<i class="fa-solid fa-xmark"></i></button>
-            <button class="lightbox__next">Suivant<i class="fa-solid fa-angle-right"></i></button>
-            <button class="lightbox__prev">Précédent<i class="fa-solid fa-angle-left"></i></button>
+        <dialog id="lightbox" aria-hidden="true" aria-label="lightbox">
+            <div role="button" class="lightbox__close"><p class="sr-only">Fermer</p><span class="fa-solid fa-xmark" aria-hidden="true"></span></div>
+            <div role="button" class="lightbox__next"><p class="sr-only">Suivant</p><span class="fa-solid fa-angle-right" aria-hidden="true"></span></div>
+            <div role="button" class="lightbox__prev"><p class="sr-only">Précédent</p><span class="fa-solid fa-angle-left" aria-hidden="true"></span></div>
             <div class="lightbox__container1">
                 <div class="lightbox__container2">
                     <div class="lightbox__container__media"></div>
@@ -36,11 +36,15 @@
                 </div>
             </div>
         </dialog>
-        <dialog id="contact_modal" role="dialog">
+        <dialog id="contact_modal" aria-hidden="true" aria-label="envoi d'un message au photographe">
             <div class="modal">
                 <header>
                     <h2></h2>
-                    <img src="assets/icons/close.svg">
+                    <svg id="modal_closure" role="img" width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" tabindex="0" aria-describedby="title description">
+                        <title id="title">Fermer</title>
+                        <desc id="description">Bouton de fermeture de la fenêtre modale</desc>
+                        <path d="M42 4.23L37.77 0L21 16.77L4.23 0L0 4.23L16.77 21L0 37.77L4.23 42L21 25.23L37.77 42L42 37.77L25.23 21L42 4.23Z" fill="white"/>
+                    </svg>
                 </header>
                 <form>
                     <div id="first_name_data" class="formData">
@@ -50,6 +54,7 @@
                             name="first_name"
                             class="text_control"
                             type="text"
+                            required
                         />
                         <p class="error_message">Vous devez indiquer un prénom contenant un minimum de 2 caractères</p>
                     </div>
@@ -60,6 +65,7 @@
                             name="last_name"
                             class="text_control"
                             type="text"
+                            required
                         />
                         <p class="error_message">Vous devez indiquer un nom contenant un minimum de 2 caractères</p>
                     </div>
@@ -70,15 +76,16 @@
                             name="email"
                             class="text_control"
                             type="text"
+                            required
                         />
                         <p class="error_message">Vous devez indiquer une adresse email valide</p>
                     </div>
                     <div id="message_data" class="formData">
                         <label for="message">Votre message</label>
-                        <textarea id="message" name="message" class="text_control"></textarea>
+                        <textarea id="message" name="message" class="text_control" required></textarea>
                         <p class="error_message">Vous devez indiquer un message contenant un minimum de 20 caractères</p>
                     </div>
-                    <button class="form_button">Envoyer</button>
+                    <bouton class="form_button">Envoyer</button>
                 </form>
                 <div id="successful_sending">Message envoyé!</div>
             </div>
