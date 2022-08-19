@@ -26,9 +26,9 @@
             <div class="photographer_data"></div>
         </main>
         <dialog id="lightbox" aria-hidden="true" aria-label="lightbox">
-            <div role="button" class="lightbox__close"><p class="sr-only">Fermer</p><span class="fa-solid fa-xmark" aria-hidden="true"></span></div>
-            <div role="button" class="lightbox__next"><p class="sr-only">Suivant</p><span class="fa-solid fa-angle-right" aria-hidden="true"></span></div>
-            <div role="button" class="lightbox__prev"><p class="sr-only">Précédent</p><span class="fa-solid fa-angle-left" aria-hidden="true"></span></div>
+            <div role="button" class="lightbox__close" tabindex="0"><p class="sr-only">Fermer</p><span class="fa-solid fa-xmark" aria-hidden="true"></span></div>
+            <div role="button" class="lightbox__next" tabindex="0"><p class="sr-only">Suivant</p><span class="fa-solid fa-angle-right" aria-hidden="true"></span></div>
+            <div role="button" class="lightbox__prev" tabindex="0"><p class="sr-only">Précédent</p><span class="fa-solid fa-angle-left" aria-hidden="true"></span></div>
             <div class="lightbox__container1">
                 <div class="lightbox__container2">
                     <div class="lightbox__container__media"></div>
@@ -85,7 +85,7 @@
                         <textarea id="message" name="message" class="text_control" required></textarea>
                         <p class="error_message">Vous devez indiquer un message contenant un minimum de 20 caractères</p>
                     </div>
-                    <bouton class="form_button">Envoyer</button>
+                    <button class="form_button">Envoyer</button>
                 </form>
                 <div id="successful_sending">Message envoyé!</div>
             </div>
