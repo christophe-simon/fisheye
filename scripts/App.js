@@ -19,8 +19,6 @@ class App {
             })
     }
 
-
-
     async displayPhotographerPage() {
         const params = (new URL(document.location)).searchParams;
         const photographerId = parseInt(params.get('photographer'));
@@ -34,44 +32,27 @@ class App {
             const mediasData = await this._mediaApi.getMediasDataByPhotographerId(photographerId);
             const mediasSortedByPopularity = mediasData.sort((a, b) => b.likes - a.likes);
             const mediasOfThisPhotographer = displayMedias(mediasSortedByPopularity);
+            createLinksOnMediasCards(mediasOfThisPhotographer);
 
             const $asideWrapper = document.querySelector('.aside');
             const asideTemplate = new Aside(photographer, mediasData);
             $asideWrapper.innerHTML = asideTemplate.createAside();
 
             manageClickOnHeartsBehaviour();
-            manageLighboxFunctionalities(mediasOfThisPhotographer);
+
+            manageLightboxControls(mediasOfThisPhotographer);
             
-
-            manageSortingDropdownMenuFunctionality(mediasOfThisPhotographer);
-
-
-
+            manageSortingFunctionality(mediasOfThisPhotographer);
 
             const $contactButton = document.querySelector('.contact_button');
-            $contactButton.addEventListener('click', displayModal);
+            $contactButton.addEventListener('click', () => displayModal(photographer));
             $contactButton.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') {
-                    displayModal;
+                    displayModal(photographer);
                 }
             });
-
-            // Addition of the name of the photographer in the modal window title
-            const $modalTitle = document.querySelector('.modal header h2');
-            $modalTitle.innerHTML = `Contactez-moi<br>${photographer.name}`;
             
-            // Creation of the addEventListener on the modal closure button
-            const $modalClosureButton = document.getElementById('modal_closure');
-            $modalClosureButton.addEventListener('click', closeModal);
-            $modalClosureButton.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    closeModal;
-                }
-            });
-
-            // Creation of the addEventListener on the send button of the modal
-            const $modalForm = document.querySelector('form');
-            $modalForm.addEventListener('submit', manageValidation);
+            manageModalControls();
 
         } else {
             this.$specificPhotographerWrapper.innerHTML = 
@@ -85,6 +66,9 @@ class App {
     }
 
 }
+
+
+
 
 const displayMedias = (array) => {
     const $mediasWrapper = document.querySelector('.photographer_portfolio__medias');
@@ -119,48 +103,37 @@ const displayMedias = (array) => {
 
 const manageClickOnHeartsBehaviour = () => {
     const $hearts = document.querySelectorAll('.heart');
+
     $hearts.forEach((heart) => {
         heart.addEventListener('click', () => {
-            heart.parentElement.classList.toggle('liked');
-            const $numberOfLikes = heart.parentElement.firstChild;
-            const $totalNumberOfLikes = document.getElementById('total_number_of_likes');
-            let numberOfLikes = parseInt($numberOfLikes.textContent);
-            let totalNumberOfLikes = parseInt($totalNumberOfLikes.textContent);
-            if (heart.parentElement.classList.contains('liked')) {
-                numberOfLikes++;
-                totalNumberOfLikes++;
-
-            } else {
-                numberOfLikes--;
-                totalNumberOfLikes--;
-            }
-            $numberOfLikes.textContent = numberOfLikes;
-            $totalNumberOfLikes.textContent = totalNumberOfLikes;
+            addOrReduceNumberOfLikes(heart);
         });
-
         heart.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
-                heart.parentElement.classList.toggle('liked');
-                const $numberOfLikes = heart.parentElement.firstChild;
-                const $totalNumberOfLikes = document.getElementById('total_number_of_likes');
-                let numberOfLikes = parseInt($numberOfLikes.textContent);
-                let totalNumberOfLikes = parseInt($totalNumberOfLikes.textContent);
-                if (heart.parentElement.classList.contains('liked')) {
-                    numberOfLikes++;
-                    totalNumberOfLikes++;
-
-                } else {
-                    numberOfLikes--;
-                    totalNumberOfLikes--;
-                }
-                $numberOfLikes.textContent = numberOfLikes;
-                $totalNumberOfLikes.textContent = totalNumberOfLikes;
+                addOrReduceNumberOfLikes(heart);
             }
         });
     });
+
+    function addOrReduceNumberOfLikes(heart) {
+        heart.parentElement.classList.toggle('liked');
+        const $numberOfLikes = heart.parentElement.firstChild;
+        const $totalNumberOfLikes = document.getElementById('total_number_of_likes');
+        let numberOfLikes = parseInt($numberOfLikes.textContent);
+        let totalNumberOfLikes = parseInt($totalNumberOfLikes.textContent);
+        if (heart.parentElement.classList.contains('liked')) {
+            numberOfLikes++;
+            totalNumberOfLikes++;
+        } else {
+            numberOfLikes--;
+            totalNumberOfLikes--;
+        }
+        $numberOfLikes.textContent = numberOfLikes;
+        $totalNumberOfLikes.textContent = totalNumberOfLikes;
+    }
 }
 
-const manageSortingDropdownMenuFunctionality = (array) => {
+const manageSortingFunctionality = (array) => {
     const $listbox = document.querySelector('.listbox');
     const $angleUp = document.querySelector('.fa-angle-up');
     const $angleDown = document.querySelector('.fa-angle-down');
@@ -169,9 +142,26 @@ const manageSortingDropdownMenuFunctionality = (array) => {
     let fullyExpandedMenu = false;
 
     $listbox.addEventListener('click', () => {
-        if ($angleDown !== null) {
-            $angleDown.style.display = 'none';
+        openOrCloseListbox();
+    });
+    $listbox.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            openOrCloseListbox();
         }
+    });
+
+    $sortingOptions.forEach((element) => {
+        element.addEventListener('click', () => {
+            manageListbox(element, array);
+        });
+        element.addEventListener('click', () => {
+            manageListbox(element, array);
+        });
+    }
+
+    );
+
+    function openOrCloseListbox() {
         if (fullyExpandedMenu === false) {
             $sortingOptions.forEach((option) => {
                 option.style.display = 'block';
@@ -186,223 +176,137 @@ const manageSortingDropdownMenuFunctionality = (array) => {
             });
             fullyExpandedMenu = false;
         }
-    });
+        if ($angleDown !== null) {
+            $angleDown.style.display = 'none';
+        }       
+    }
 
-    // $listbox.addEventListener('keypress', (e) => {
-    //     if (e.key === 'Enter') {
-    //         if ($angleDown !== null) {
-    //             $angleDown.style.display = 'none';
-    //         }
-    //         if (fullyExpandedMenu === false) {
-    //             $sortingOptions.forEach((option) => {
-    //                 option.style.display = 'block';
-    //             });
-    //             $optionShown[0].focus();
-    //             fullyExpandedMenu = true;
-    //             $angleUp.style.display = 'block';
-    //         } else {
-    //             $sortingOptions.forEach((option) => {
-    //                 option.style.display = 'none';
-    //             });
-    //             fullyExpandedMenu = false;
-    //         }
-    //     }
-    // });
+    function manageListbox(element, array) {
+        $angleDown.style.display = 'block';
 
-    $sortingOptions.forEach((element) =>
-        element.addEventListener('click', () => {
-            $angleDown.style.display = 'block';
+        switch (element.value) {
+            case 'popularity':
+                array.sort((a, b) => b._likes - a._likes);
+            break;
+            case 'date':
+                array.sort((a, b) => new Date(b._date) - new Date(a._date));
+                array.forEach((elt) => console.log(elt._date))
+            break;
+            case 'title':
+                array.sort((a, b) => a._title.localeCompare(b._title));
+            break;
+        }
 
-            switch (element.value) {
-                case 'popularity':
-                    array.sort((a, b) => b._likes - a._likes);
-                break;
-                case 'date':
-                    array.sort((a, b) => new Date(b._date) - new Date(a._date));
-                    array.forEach((elt) => console.log(elt._date))
-                break;
-                case 'title':
-                    array.sort((a, b) => a._title.localeCompare(b._title));
-                break;
-            }
+        displayMedias(array);
+        manageClickOnHeartsBehaviour();
+        createLinksOnMediasCards(array);
 
-            
-            displayMedias(array);
-            manageClickOnHeartsBehaviour();
-            manageLighboxFunctionalities(array);
+        let $hiddenButton = document.querySelector('.dropdown_menu .hidden button');
+        const $activeOption = document.querySelector('.active_option');
+        const clickedOptionPosition = $sortingOptions.indexOf(element);
+        const clickedOptionValue = $sortingOptions[clickedOptionPosition].innerText;
 
-            // new list of options
-            let $hiddenButton = document.querySelector('.dropdown_menu .hidden button');
-            const $activeOption = document.querySelector('.active_option');
-            const clickedOptionPosition = $sortingOptions.indexOf(element);
-            const clickedOptionValue = $sortingOptions[clickedOptionPosition].innerText;
-
-            $activeOption.innerText = clickedOptionValue;
-            $listbox.setAttribute('aria-label', `tri des médias par ${clickedOptionValue.toLowerCase()}`);
-            $listbox.setAttribute('aria-expanded', 'false');
-            document.querySelector('.dropdown_menu .hidden').appendChild(element);
-            document.querySelector('.dropdown_menu').appendChild($hiddenButton);
-            
-            $hiddenButton = document.querySelector('.dropdown_menu .hidden button');
-            const $optionsShown = document.querySelectorAll('.dropdown_menu > button');
-            
-            fullyExpandedMenu = false;
-            $angleUp.style.display = 'none';
-            $hiddenButton.setAttribute('aria-selected', 'true');
-            $optionsShown.forEach((option) => {
-                option.style.display = 'none';
-                option.setAttribute('aria-selected', 'false');
-            });
-            $listbox.focus();
-            
-        })
-
-        // element.addEventListener('keypress', (e) => {
-        //     if (e.key === 'Enter') {
-        //         $angleDown.style.display = 'block';
-
-        //         switch (element.value) {
-        //             case 'popularity':
-        //             array.sort(function (a, b) {
-        //                 return b.likes - a.likes;
-        //             });
-        //             break;
-        //             case 'date':
-        //             array.sort(function (a, b) {
-        //                 return new Date(b.date) - new Date(a.date);
-        //             });
-        //             break;
-        //             case 'title':
-        //             array.sort(function (a, b) {
-        //                 return a.title.localeCompare(b.title);
-        //             });
-        //             break;
-        //         }
-
-        //         displayMedias(array);
-        //         manageClickOnHeartsBehaviour();
-        //         manageLighboxFunctionalities(array);
-
-        //         // new list of options
-        //         const $hiddenButton = document.querySelector('.hidden button');
-        //         const $activeOption = document.querySelector('.active_option');
-        //         const currentButtonPos = $sortingOptions.indexOf(element);
-        //         const clickedOptionValue = $sortingOptions[currentButtonPos].innerText;
-        //         $activeOption.innerText = clickedOptionValue;
-        //         $listbox.setAttribute('aria-label', `liste de tri, trié par ${clickedOptionValue}`);
-        //         document.querySelector('.dropdown_menu').appendChild($hiddenButton);
-        //         document.querySelector('.hidden').appendChild(element);
-                
-        //         // close the sortwidget after clicking on an option
-        //         $sortingOptions.forEach((option) => {
-        //             option.style.display = 'none';
-        //         });
-                
-        //         fullyExpandedMenu = false;
-        //         $listbox.focus();
-
-
-        //         $angleUp.style.display = 'none';
-        //     }
-        // })
-    );
+        $activeOption.innerText = clickedOptionValue;
+        $listbox.setAttribute('aria-label', `tri des médias par ${clickedOptionValue.toLowerCase()}`);
+        $listbox.setAttribute('aria-expanded', 'false');
+        document.querySelector('.dropdown_menu .hidden').appendChild(element);
+        document.querySelector('.dropdown_menu').appendChild($hiddenButton);
+        
+        $hiddenButton = document.querySelector('.dropdown_menu .hidden button');
+        const $optionsShown = document.querySelectorAll('.dropdown_menu > button');
+        
+        fullyExpandedMenu = false;
+        $angleUp.style.display = 'none';
+        $hiddenButton.setAttribute('aria-selected', 'true');
+        $optionsShown.forEach((option) => {
+            option.style.display = 'none';
+            option.setAttribute('aria-selected', 'false');
+        });
+        $listbox.focus();
+    }               
 }
 
-const manageLighboxFunctionalities = (array) => {
-    const $links = document.querySelectorAll('.media_card__media');
+const createLinksOnMediasCards = (array) => {
+    const $mediasCards = document.querySelectorAll('.media_card__media');
     
-    $links.forEach((link, index) => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const lightbox = new Lightbox(array, index);
-            lightbox.reinitialize();
-            lightbox.close();
-            lightbox.display();
-        })
-        // .addEventListener('keypress', (e) => {
-        //     if (e.key === 'Enter') {
-        //         e.preventDefault();
-        //         const lightbox = new Lightbox(array, index);
-        //         lightbox.reinitialize();
-        //         lightbox.display();
-        //     }
-        // })
+    $mediasCards.forEach((card, index) => {
+        card.addEventListener('click', () => {
+            displayLightbox(array, index);
+        });
+        card.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                displayLightbox(array, index);
+            }
+        });
     });
 
-    // const $lightbox = document.getElementById('lightbox');
+    function displayLightbox(array, index) {
+        const lightbox = new Lightbox(array, index);
+        lightbox.reinitialize();
+        lightbox.close();
+        lightbox.display();
+    }
+}
+
+
+const manageLightboxControls = (array) => {
+
     const $lightboxCloseButton = document.querySelector('.lightbox__close');
     const $lightboxNextButton = document.querySelector('.lightbox__next');
     const $lightboxPreviousButton = document.querySelector('.lightbox__prev');
-    const $mediaWrapper = document.querySelector('.lightbox__container__media');
-    const $titleWrapper = document.querySelector('.lightbox__container__title');
 
-    $lightboxCloseButton.addEventListener('click', () => {
+    $lightboxCloseButton.addEventListener('click', () => closeLightbox(array));
+    $lightboxCloseButton.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            closeLightbox(array);
+        }
+    });
+
+    $lightboxNextButton.addEventListener('click', () => goToNextMedia(array));
+    $lightboxNextButton.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            console.log('next');
+            goToNextMedia(array);
+        }
+    });
+
+    $lightboxPreviousButton.addEventListener('click', () => goToPreviousMedia(array));
+    $lightboxPreviousButton.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            console.log('prev');
+            goToPreviousMedia(array);
+        }
+    });
+
+    function closeLightbox(array) {
+        const $mediaWrapper = document.querySelector('.lightbox__container__media');
         let mediaId = parseInt($mediaWrapper.firstChild.dataset.mediaId);
         let index = array.findIndex((media) => media._id === mediaId);
         const lightbox = new Lightbox(array, index);
         lightbox.close();
-    });
+    }
 
-    $lightboxCloseButton.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            let mediaId = parseInt($mediaWrapper.firstChild.dataset.mediaId);
-            let index = array.findIndex((media) => media._id === mediaId);
-            const lightbox = new Lightbox(array, index);
-            lightbox.close();
-        }
-    });
-
-    $lightboxNextButton.addEventListener('click', goToNextMedia(array));
-
-    // $lightboxNextButton.addEventListener('click', () => {
-    //     let mediaId = parseInt($mediaWrapper.firstChild.dataset.mediaId);
-    //     console.log(mediaId);
-    //     let index = array.findIndex((media) => media._id === mediaId);
-    //     const lightbox = new Lightbox(array, index);
-    //     lightbox.next();
-    // });
-
-    // $lightboxNextButton.addEventListener('keypress', (e) => {
-    //     if (e.key === 'Enter') {
-    //         let mediaId = parseInt($mediaWrapper.firstChild.dataset.mediaId);
-    //         let index = array.findIndex((media) => media._id === mediaId);
-    //         const lightbox = new Lightbox(array, index);
-    //         lightbox.next();
-    //     }
-    // });
-
-    $lightboxPreviousButton.addEventListener('click', goToPreviousMedia);
-
-    $lightboxPreviousButton.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            let mediaId = parseInt($mediaWrapper.firstChild.dataset.mediaId);
-            let index = array.findIndex((media) => media._id === mediaId);
-            const lightbox = new Lightbox(array, index);
-            lightbox.previous();
-        }
-    });
-
-}
-
-function goToNextMedia(array) {
-    const $mediaWrapper = document.querySelector('.lightbox__container__media');
-    console.log($mediaWrapper.children.length);
-    if ($mediaWrapper.children.length !== 0) {
+    function goToNextMedia(array) {
+        const $mediaWrapper = document.querySelector('.lightbox__container__media');
         let mediaId = parseInt($mediaWrapper.firstChild.dataset.mediaId);
-        console.log(mediaId);
         let index = array.findIndex((media) => media._id === mediaId);
         const lightbox = new Lightbox(array, index);
         lightbox.next();
     }
+    
+    function goToPreviousMedia(array) {
+        const $mediaWrapper = document.querySelector('.lightbox__container__media');
+        let mediaId = parseInt($mediaWrapper.firstChild.dataset.mediaId);
+        let index = array.findIndex((media) => media._id === mediaId);
+        const lightbox = new Lightbox(array, index);
+        lightbox.previous();
+    }
+
 }
 
-function goToPreviousMedia() {
-    const $mediaWrapper = document.querySelector('.lightbox__container__media');
-    let mediaId = parseInt($mediaWrapper.firstChild.dataset.mediaId);
-    let index = array.findIndex((media) => media._id === mediaId);
-    const lightbox = new Lightbox(array, index);
-    lightbox.previous();
-}
+
+
+
 
 const currentPage = document.location.pathname;
 const app = new App();

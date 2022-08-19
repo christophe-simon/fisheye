@@ -28,15 +28,6 @@
         const $title = document.querySelector('.lightbox__container__title');
         const title = media._title;
         $title.textContent = title;
-
-
-
-        const $body = document.getElementById('body');
-        const $firstName = document.getElementById('first_name');
-        $body.classList.add('no-scroll');
-        $modal.style.display = 'block';
-        initializeModal();
-        $firstName.focus();
     }
 
     reinitialize() {
