@@ -154,8 +154,10 @@ const manageSortingFunctionality = (array) => {
         element.addEventListener('click', () => {
             manageListbox(element, array);
         });
-        element.addEventListener('click', () => {
-            manageListbox(element, array);
+        element.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                manageListbox(element, array);
+            }
         });
     }
 
