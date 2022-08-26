@@ -192,7 +192,6 @@ const manageSortingFunctionality = (array) => {
         break;
       case 'date':
         array.sort((a, b) => new Date(b._date) - new Date(a._date));
-        array.forEach((elt) => console.log(elt._date))
         break;
       case 'title':
         array.sort((a, b) => a._title.localeCompare(b._title));
@@ -267,7 +266,6 @@ const manageLightboxControls = (array) => {
   $lightboxNextButton.addEventListener('click', () => goToNextMedia(array));
   $lightboxNextButton.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
-      console.log('next');
       goToNextMedia(array);
     }
   });
@@ -275,7 +273,6 @@ const manageLightboxControls = (array) => {
   $lightboxPreviousButton.addEventListener('click', () => goToPreviousMedia(array));
   $lightboxPreviousButton.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
-      console.log('prev');
       goToPreviousMedia(array);
     }
   });

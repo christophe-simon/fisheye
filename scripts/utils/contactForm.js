@@ -68,7 +68,6 @@ function manageModalControls() {
   const $modalClosureButton = document.getElementById('modal_closure');
   const $modalForm = document.querySelector('form');
 
-  console.log('bouton', $modalClosureButton);
   $modalClosureButton.addEventListener('click', closeModal);
   $modalClosureButton.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {

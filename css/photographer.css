@@ -15,15 +15,14 @@
  }
 
 .photographer_data {
-    padding: 0 100px;
+    padding: 0 20px;
 }
 
 .photographer_presentation {
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
     align-items: center;
     background-color: #FAFAFA;
-    height: 300px;
     margin: 0;
     margin-bottom: 30px;
 }
@@ -31,10 +30,10 @@
 .photographer_presentation__data {
     display: flex;
     flex-direction: column;
-    width: 30%;
     font-family: 'DM Sans';
     font-style: normal;
     font-weight: 400;
+    margin-bottom: 30px;
 }
 
 .photographer_presentation__data h1 {
@@ -61,7 +60,7 @@
 .photographer_presentation__button {
     display: flex;
     justify-content: center;
-    width: 30%;
+    margin-bottom: 30px;
 }
 
 .contact_button, .form_button {
@@ -80,7 +79,6 @@
 .photographer_presentation__picture {
     display: flex;
     justify-content: end;
-    width: 30%;
 }
 
 .photographer_presentation__picture img {
@@ -354,7 +352,7 @@
 .modal {
     border-radius: 5px;
     background-color: #DB8876;
-    width: 50%;
+    width: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -364,11 +362,11 @@
 }
 
 .modal header {
+    display: flex;
     justify-content: space-between;
     align-items: flex-start;
     width: 100%;
-    height: 150px;
-    margin-bottom: 52px;
+    margin-bottom: 30px;
 }
 
 .modal header img {
@@ -376,10 +374,7 @@
 }
 
 .modal header h2 {
-    font-size: 64px;
-    line-height: 83px;
-    font-weight: normal;
-    text-align: center;
+    font-size: 32px;
     margin: 0;
     text-align: left;
 }
@@ -393,7 +388,7 @@
 
 .modal form label {
     color: #312E2E;
-    font-size: 36px;
+    font-size: 24px;
 }
 
 .modal form div {
@@ -458,7 +453,53 @@
     font-size: 32px;
 }
 
+@media (min-width: 600px) {
+    .photographer_data {
+        padding: 0 50px;
+    }
+
+    .modal {
+        width: 65%;
+    }
+
+    .modal header h2 {
+        font-size: 40px;
+    }
+    
+    .modal form label {
+        font-size: 30px;
+    }
+}
+
+@media (min-width: 800px) {
+    .photographer_data {
+        padding: 0 100px;
+    }
+
+    .modal {
+        width: 50%;
+    }
+
+    .modal header h2 {
+        font-size: 48px;
+    }
+    
+    .modal form label {
+        font-size: 36px;
+    }
+}
+
 @media (min-width: 950px) {
+    .photographer_presentation {
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .photographer_presentation__data, .photographer_presentation__button, .photographer_presentation__picture {
+        width: 30%;
+        margin-bottom: 0;
+    }
+
     .photographer_portfolio__medias {
         display: flex;
         flex-direction: row;
