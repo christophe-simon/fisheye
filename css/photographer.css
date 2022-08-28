@@ -97,6 +97,7 @@
     color: #000000;
     margin: 0;
     margin-bottom: 30px;
+    height: 60px;
 }
 
 .photographer_portfolio__sorted_by .legend {
@@ -111,6 +112,8 @@
     border-radius: 5px;
     cursor: pointer;
     z-index: 10;
+    position: absolute;
+    left: 300px;
 }
 
 .dropdown_menu .listbox {
