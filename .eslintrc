@@ -14,7 +14,26 @@
     ],
     "rules": {
         "eqeqeq": "warn",
-        "indent": ["warn", 2, { "SwitchCase": 1 }],
-        "multiline-ternary": ["warn", "always-multiline"]
-      }
+        "indent": ["warn", 4, { "SwitchCase": 1 }],
+        "multiline-ternary": ["warn", "always-multiline"],
+        "no-unused-vars": "off"
+      },
+    "globals": {
+      "Api": "readonly",
+      "PhotographerApi": "readonly",
+      "MediaApi": "readonly",
+      "Photographer": "readonly",
+      "PhotographerCard": "readonly",
+      "PhotographerPage": "readonly",
+      "Aside": "readonly",
+      "displayModal": "readonly",
+      "manageModalControls": "readonly",
+      "Media": "readonly",
+      "MediaCard": "readonly",
+      "Video": "readonly",
+      "VideoCard": "readonly",
+      "ImageCard": "readonly",
+      "Lightbox": "readonly",
+      "manageValidation": "readonly"
+    }
   }
