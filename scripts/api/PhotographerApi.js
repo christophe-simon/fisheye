@@ -14,7 +14,6 @@ class PhotographerApi extends Api {
 
     async getPhotographerDataByPhotographerId(photographerId) {
     
-        // Version 3 of this code
         const data = await this.get();
         return data.photographers.find(element => element.id === photographerId);
     }

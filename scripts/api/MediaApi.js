@@ -16,6 +16,5 @@ class MediaApi extends Api {
 
         const data = await this.get();
         return data.media.filter(element => element.photographerId === photographerId);
-
     }
 }
