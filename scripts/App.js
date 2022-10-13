@@ -2,8 +2,8 @@ class App {
     constructor() {
         this.$photographersWrapper = document.querySelector('.photographers_section');
         this.$specificPhotographerWrapper = document.querySelector('.photographer_data');
-        this._photographerApi = new PhotographerApi('/data/photographers.json');
-        this._mediaApi = new MediaApi('/data/photographers.json');
+        this._photographerApi = new PhotographerApi('data/photographers.json');
+        this._mediaApi = new MediaApi('data/photographers.json');
     }
 
     async displayHomePage() {
