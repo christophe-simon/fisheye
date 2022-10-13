@@ -60,8 +60,7 @@ class App {
         }
     }
 
-    async displayErrorPage() {
- 
+    displayErrorPage() {
         console.log('Aucune page ne correspond malheureusement à cette adresse.');
     }
 
@@ -309,10 +308,11 @@ const manageLightboxControls = (array) => {
 
 const currentPage = document.location.pathname;
 const app = new App();
-console.log(currentPage)
 switch (currentPage) {
     case '/':
+    case '/fisheye/':
     case '/index.html':
+    case '/fisheye/index.html':
         app.displayHomePage();
         break;
     case '/photographer.html':
