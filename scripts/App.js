@@ -309,6 +309,7 @@ const manageLightboxControls = (array) => {
 
 const currentPage = document.location.pathname;
 const app = new App();
+console.log(currentPage)
 switch (currentPage) {
     case '/':
     case '/index.html':
