@@ -14,6 +14,7 @@ class PhotographerCard {
         // a.photographer_card__link contains the picture of the photographer
         const $img = document.createElement('img');
         $img.setAttribute('src', this._photographer.portrait);
+        $img.setAttribute('loading', "lazy");
         $img.setAttribute('alt', this._photographer.name);
 
         // a.photographer_card__link contains the name of the photographer
