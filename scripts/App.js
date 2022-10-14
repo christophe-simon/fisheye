@@ -316,6 +316,7 @@ switch (currentPage) {
         app.displayHomePage();
         break;
     case '/photographer.html':
+    case '/fisheye/photographer.html':
         app.displayPhotographerPage();
         break;
     default:
