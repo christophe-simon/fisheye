@@ -12,7 +12,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Fisheye project Screenshot][product-screenshot]](https://christophe-simon.github.io/fisheye/)
 
 FishEye is a website that allows independent photographers to present their best works. It was developped for a fictive company as a student homework.
 
@@ -47,12 +47,13 @@ git clone https://github.com/christophe-simon/fisheye
 
 
 <!-- USAGE EXAMPLES -->
+<!--
 ## Usage
 
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
 _For more examples, please refer to the [Documentation](https://example.com)_
-
+-->
 
 <!-- CONTACT -->
 ## Contact
@@ -85,4 +86,4 @@ Project Link: [https://github.com/christophe-simon/fisheye](https://github.com/c
 [issues-url]: https://github.com/christophe-simon/fisheye/issues
 [license-shield]: https://img.shields.io/github/license/christophe-simon/fisheye.svg?style=flat-square
 [license-url]: https://github.com/christophe-simon/fisheye/blob/master/LICENSE.txt
-[product-screenshot]: docs/cover.jpg
+[product-screenshot]: docs/screenshot.jpg
